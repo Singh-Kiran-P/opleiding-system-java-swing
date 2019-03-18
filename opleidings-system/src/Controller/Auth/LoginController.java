@@ -16,11 +16,11 @@ import java.util.logging.Logger;
 
 public class LoginController {
     @FXML
-    public void Login(ActionEvent event) {
+    public void btn_login(ActionEvent event) {
         System.out.println("helllo world");
     }
 
-    public void Register(ActionEvent event)  throws Exception {
+    public void btn_register(ActionEvent event)  throws Exception {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UI/Views/Auth/Register.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
