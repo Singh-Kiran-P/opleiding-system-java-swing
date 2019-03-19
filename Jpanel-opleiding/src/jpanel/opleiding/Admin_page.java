@@ -5,6 +5,14 @@
  */
 package jpanel.opleiding;
 
+import java.awt.Dimension;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author singh
@@ -27,31 +35,94 @@ public class Admin_page extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        btn_logout = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        list_opleiding = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        btn_Toevoegen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
-        jLabel1.setText("jLabel1");
+        btn_logout.setText("Logout");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_logout);
+        btn_logout.setBounds(840, 340, 100, 21);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel1)
-                .addContainerGap(189, Short.MAX_VALUE))
-        );
+        jScrollPane1.setViewportView(list_opleiding);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 10, 170, 250);
+
+        jButton1.setText("Laad opleidingen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(50, 270, 120, 21);
+
+        btn_Toevoegen.setText("Opleiding Toevoegen");
+        btn_Toevoegen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ToevoegenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Toevoegen);
+        btn_Toevoegen.setBounds(40, 300, 140, 21);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * FROM `opleiding`";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                model.addElement(rs.getString("opleiding"));
+
+                //this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+        list_opleiding.setModel(model);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_ToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ToevoegenActionPerformed
+        // TODO add your handling code here:
+
+        OpleidingToevoegen opleidingtoevoegen = new OpleidingToevoegen();
+        opleidingtoevoegen.setVisible(rootPaneCheckingEnabled);
+        opleidingtoevoegen.setPreferredSize(new Dimension(346, 300));
+        opleidingtoevoegen.pack();
+        opleidingtoevoegen.setLocationRelativeTo(null);
+        opleidingtoevoegen.setVisible(rootPaneCheckingEnabled);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_ToevoegenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,13 +141,17 @@ public class Admin_page extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_page.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_page.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_page.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_page.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -84,11 +159,28 @@ public class Admin_page extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Admin_page().setVisible(false);
+                new Admin_page().listInladen();
             }
+
         });
+
+    }
+
+    public void listInladen() {
+
+        DefaultListModel model = new DefaultListModel();
+        model.addElement("hello");
+        model.addElement("hello");
+        model.addElement("hello");
+
+        list_opleiding.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btn_Toevoegen;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list_opleiding;
     // End of variables declaration//GEN-END:variables
 }

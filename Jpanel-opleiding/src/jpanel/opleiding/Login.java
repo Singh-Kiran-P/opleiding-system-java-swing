@@ -60,6 +60,8 @@ public class Login extends javax.swing.JFrame {
         btn_Login = new javax.swing.JButton();
         btn_Register = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 102));
@@ -146,6 +148,32 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(210, 150, 180, 30);
 
+        jPanel3.setBackground(new java.awt.Color(0, 102, 204));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("X");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(370, 0, 31, 29);
+
         setSize(new java.awt.Dimension(400, 300));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -180,22 +208,24 @@ public class Login extends javax.swing.JFrame {
                 if (rs.getString("role").equals("admin")) {
                     Admin_page mf = new Admin_page();
                     // set the jframe size and location, and make it visible
-                    mf.setPreferredSize(new Dimension(772, 449));
+                    mf.setPreferredSize(new Dimension(970, 404));
                     mf.pack();
                     mf.setLocationRelativeTo(null);
-                    mf.setVisible(true);
+                    mf.setVisible(rootPaneCheckingEnabled);
                     mf.main(info);
+                    this.setVisible(false);
 
                 }
                 if (!rs.getString("role").equals("admin")) {
-                Home_JFrame mf = new Home_JFrame();
-                // set the jframe size and location, and make it visible
-                mf.setPreferredSize(new Dimension(772, 449));
-                mf.pack();
-                mf.setLocationRelativeTo(null);
-                mf.setVisible(true);
-                mf.main(info);
-                this.setVisible(false);
+                    Home_JFrame mf = new Home_JFrame();
+                    // set the jframe size and location, and make it visible
+                    mf.setPreferredSize(new Dimension(800, 500));
+                    mf.pack();
+                    mf.setLocationRelativeTo(null);
+                    mf.setVisible(rootPaneCheckingEnabled);
+                    mf.main(info);
+                    this.setVisible(false);
+
                 }
 
                 //this.dispose();
@@ -216,6 +246,11 @@ public class Login extends javax.swing.JFrame {
         register_form.setVisible(rootPaneCheckingEnabled);
         this.setVisible(false);
     }//GEN-LAST:event_btn_RegisterActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -255,12 +290,14 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Login;
     private javax.swing.JButton btn_Register;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txt_Username;
     // End of variables declaration//GEN-END:variables

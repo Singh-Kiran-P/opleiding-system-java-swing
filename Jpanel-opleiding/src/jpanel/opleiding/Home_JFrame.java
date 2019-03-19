@@ -34,6 +34,7 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_username = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JLabel();
         txt_username2 = new javax.swing.JLabel();
+        btn_logout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btn_Profile = new javax.swing.JButton();
 
@@ -54,8 +55,17 @@ public class Home_JFrame extends javax.swing.JFrame {
         Profile_Panel.add(txt_username2);
         txt_username2.setBounds(130, 120, 50, 20);
 
+        btn_logout.setText("Logout");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+        Profile_Panel.add(btn_logout);
+        btn_logout.setBounds(460, 420, 100, 21);
+
         getContentPane().add(Profile_Panel);
-        Profile_Panel.setBounds(230, 0, 540, 450);
+        Profile_Panel.setBounds(230, 0, 570, 500);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -83,14 +93,20 @@ public class Home_JFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(btn_Profile)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 230, 450);
+        jPanel1.setBounds(0, 0, 230, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
         // TODO add your handling code here:
@@ -137,6 +153,7 @@ public class Home_JFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Profile_Panel;
     private javax.swing.JButton btn_Profile;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txt_username;
     private javax.swing.JLabel txt_username1;
