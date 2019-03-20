@@ -55,7 +55,7 @@ public class Register extends javax.swing.JFrame {
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
-                    .prepareStatement("INSERT INTO `user` (`id`,`role`,`name`, `firstname`, `username`, `password`, `email`, `active`) VALUES (NULL, `student` , ?, ?,?, ?, '0')");
+                    .prepareStatement("INSERT INTO `user` (`id`,`role`,`name`, `firstname`, `username`, `password`, `email`, `active`) VALUES (NULL, 'student' , ?, ?,?, ?,?, '0')");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
             preparedStatement.setString(1, txt_Name.getText());

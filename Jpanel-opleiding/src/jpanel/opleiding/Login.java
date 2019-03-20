@@ -219,6 +219,7 @@ public class Login extends javax.swing.JFrame {
                     mf.listInladen();
                     mf.setInfo(info);
                     mf.main();
+                    
                     this.setVisible(false);
 
                 }

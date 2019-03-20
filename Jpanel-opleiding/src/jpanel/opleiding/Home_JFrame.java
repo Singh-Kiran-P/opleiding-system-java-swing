@@ -5,6 +5,8 @@
  */
 package jpanel.opleiding;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import jpanel.opleiding.Login;
 
 /**
@@ -36,11 +38,12 @@ public class Home_JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelOpleiding = new javax.swing.JPanel();
+        ds = new javax.swing.JButton();
         Profile_Panel = new javax.swing.JPanel();
         txt_username = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JLabel();
         txt_username2 = new javax.swing.JLabel();
-        btn_logout = new javax.swing.JButton();
         txt_username3 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         txt_Name = new javax.swing.JTextField();
@@ -48,12 +51,22 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_user = new javax.swing.JTextField();
         txt_role = new javax.swing.JTextField();
         txt_username4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        sidePanel = new javax.swing.JPanel();
         btn_Profile = new javax.swing.JButton();
-        btn_Profile1 = new javax.swing.JButton();
+        btn_Opleiding = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        PanelOpleiding.setLayout(null);
+
+        ds.setText("Opleidingen");
+        PanelOpleiding.add(ds);
+        ds.setBounds(190, 210, 87, 21);
+
+        getContentPane().add(PanelOpleiding);
+        PanelOpleiding.setBounds(230, 0, 580, 460);
 
         Profile_Panel.setLayout(null);
 
@@ -68,15 +81,6 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_username2.setText("Firstname");
         Profile_Panel.add(txt_username2);
         txt_username2.setBounds(70, 100, 140, 20);
-
-        btn_logout.setText("Logout");
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
-            }
-        });
-        Profile_Panel.add(btn_logout);
-        btn_logout.setBounds(460, 420, 100, 21);
 
         txt_username3.setText("Username");
         Profile_Panel.add(txt_username3);
@@ -97,9 +101,9 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_username4.setBounds(70, 210, 40, 20);
 
         getContentPane().add(Profile_Panel);
-        Profile_Panel.setBounds(230, 0, 570, 500);
+        Profile_Panel.setBounds(230, 0, 580, 460);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        sidePanel.setBackground(new java.awt.Color(0, 102, 204));
 
         btn_Profile.setBackground(new java.awt.Color(255, 255, 255));
         btn_Profile.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -111,57 +115,73 @@ public class Home_JFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_Profile1.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Profile1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btn_Profile1.setText("Profile");
-        btn_Profile1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_Profile1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Opleiding.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Opleiding.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btn_Opleiding.setText("Opleidingen");
+        btn_Opleiding.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Opleiding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Profile1ActionPerformed(evt);
+                btn_OpleidingActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Profile1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnLogout.setText("Logout");
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
+        sidePanel.setLayout(sidePanelLayout);
+        sidePanelLayout.setHorizontalGroup(
+            sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Opleiding, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Profile, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(btn_Profile1)
-                .addGap(26, 26, 26)
+        sidePanelLayout.setVerticalGroup(
+            sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidePanelLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
                 .addComponent(btn_Profile)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_Opleiding)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(43, 43, 43))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 0, 500);
+        getContentPane().add(sidePanel);
+        sidePanel.setBounds(0, 0, 228, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Login().setVisible(true);
-    }//GEN-LAST:event_btn_logoutActionPerformed
-
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
         // TODO add your handling code here:
         Profile_Panel.setVisible(true);
+        PanelOpleiding.setVisible(false);
     }//GEN-LAST:event_btn_ProfileActionPerformed
 
-    private void btn_Profile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Profile1ActionPerformed
+    private void btn_OpleidingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OpleidingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Profile1ActionPerformed
+        Profile_Panel.setVisible(false);
+        PanelOpleiding.setVisible(true);
+    }//GEN-LAST:event_btn_OpleidingActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     public void inLaden() {
         txt_user.setText(info[3]);
@@ -169,6 +189,9 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_Name.setText(info[1]);
         txt_firstname.setText(info[2]);
         txt_email.setText(info[4]);
+        Profile_Panel.setVisible(false);
+        PanelOpleiding.setVisible(false);
+
     }
 
     /**
@@ -209,11 +232,13 @@ public class Home_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelOpleiding;
     private javax.swing.JPanel Profile_Panel;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btn_Opleiding;
     private javax.swing.JButton btn_Profile;
-    private javax.swing.JButton btn_Profile1;
-    private javax.swing.JButton btn_logout;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton ds;
+    private javax.swing.JPanel sidePanel;
     private javax.swing.JTextField txt_Name;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_firstname;

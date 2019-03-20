@@ -361,7 +361,6 @@ public class Admin_page extends javax.swing.JFrame {
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/stagedb?"
                             + "user=root&password=");
-            String query = "UPDATE `opleiding` SET `opleiding` = ?, `location` = ?, `datum` = ? WHERE `opleiding`.`id` = ?";
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
