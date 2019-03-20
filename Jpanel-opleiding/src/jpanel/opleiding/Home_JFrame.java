@@ -5,7 +5,15 @@
  */
 package jpanel.opleiding;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import jpanel.opleiding.Login;
 
@@ -38,8 +46,6 @@ public class Home_JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelOpleiding = new javax.swing.JPanel();
-        ds = new javax.swing.JButton();
         Profile_Panel = new javax.swing.JPanel();
         txt_username = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JLabel();
@@ -51,6 +57,9 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_user = new javax.swing.JTextField();
         txt_role = new javax.swing.JTextField();
         txt_username4 = new javax.swing.JLabel();
+        btn_save = new javax.swing.JButton();
+        PanelOpleiding = new javax.swing.JPanel();
+        ds = new javax.swing.JButton();
         sidePanel = new javax.swing.JPanel();
         btn_Profile = new javax.swing.JButton();
         btn_Opleiding = new javax.swing.JButton();
@@ -58,6 +67,96 @@ public class Home_JFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        txt_username.setText("email");
+
+        txt_username1.setText("Name");
+
+        txt_username2.setText("Firstname");
+
+        txt_username3.setText("Username");
+
+        txt_username4.setText("role");
+
+        btn_save.setText("Save");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Profile_PanelLayout = new javax.swing.GroupLayout(Profile_Panel);
+        Profile_Panel.setLayout(Profile_PanelLayout);
+        Profile_PanelLayout.setHorizontalGroup(
+            Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                                .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                                .addComponent(txt_username3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                                .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                                .addComponent(txt_username4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txt_role, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(210, 210, 210))
+        );
+        Profile_PanelLayout.setVerticalGroup(
+            Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Profile_PanelLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txt_username3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Profile_PanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_username4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_role, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(Profile_Panel);
+        Profile_Panel.setBounds(230, 0, 580, 460);
 
         PanelOpleiding.setLayout(null);
 
@@ -67,41 +166,6 @@ public class Home_JFrame extends javax.swing.JFrame {
 
         getContentPane().add(PanelOpleiding);
         PanelOpleiding.setBounds(230, 0, 580, 460);
-
-        Profile_Panel.setLayout(null);
-
-        txt_username.setText("email");
-        Profile_Panel.add(txt_username);
-        txt_username.setBounds(70, 180, 40, 20);
-
-        txt_username1.setText("Name");
-        Profile_Panel.add(txt_username1);
-        txt_username1.setBounds(70, 60, 60, 20);
-
-        txt_username2.setText("Firstname");
-        Profile_Panel.add(txt_username2);
-        txt_username2.setBounds(70, 100, 140, 20);
-
-        txt_username3.setText("Username");
-        Profile_Panel.add(txt_username3);
-        txt_username3.setBounds(70, 140, 60, 20);
-        Profile_Panel.add(txt_email);
-        txt_email.setBounds(140, 170, 230, 30);
-        Profile_Panel.add(txt_Name);
-        txt_Name.setBounds(140, 50, 230, 30);
-        Profile_Panel.add(txt_firstname);
-        txt_firstname.setBounds(140, 90, 230, 30);
-        Profile_Panel.add(txt_user);
-        txt_user.setBounds(140, 130, 230, 30);
-        Profile_Panel.add(txt_role);
-        txt_role.setBounds(140, 210, 230, 30);
-
-        txt_username4.setText("role");
-        Profile_Panel.add(txt_username4);
-        txt_username4.setBounds(70, 210, 40, 20);
-
-        getContentPane().add(Profile_Panel);
-        Profile_Panel.setBounds(230, 0, 580, 460);
 
         sidePanel.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -154,13 +218,13 @@ public class Home_JFrame extends javax.swing.JFrame {
                 .addComponent(btn_Profile)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Opleiding)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(btnLogout)
-                .addGap(43, 43, 43))
+                .addContainerGap())
         );
 
         getContentPane().add(sidePanel);
-        sidePanel.setBounds(0, 0, 228, 500);
+        sidePanel.setBounds(0, 0, 228, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -182,6 +246,15 @@ public class Home_JFrame extends javax.swing.JFrame {
         this.setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        try {
+            // TODO add your handling code here:
+            wijzig_user();
+        } catch (Exception ex) {
+            Logger.getLogger(Home_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     public void inLaden() {
         txt_user.setText(info[3]);
@@ -231,12 +304,49 @@ public class Home_JFrame extends javax.swing.JFrame {
         });
     }
 
+    private Connection connect = null;
+    private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+
+    public void wijzig_user() throws Exception {
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/stagedb?"
+                            + "user=root&password=");
+
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect
+                    .prepareStatement("UPDATE `user` SET `role` = ?, `name` = ?, `firstname` = ?, `username` = ?, `email` = ? WHERE `user`.`id` = ?");
+            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            // Parameters start with 1
+            preparedStatement.setString(1, txt_role.getText());
+            preparedStatement.setString(2, txt_Name.getText());
+            preparedStatement.setString(3, txt_firstname.getText());
+            preparedStatement.setString(4, txt_user.getText());
+            preparedStatement.setString(5, txt_email.getText());
+            preparedStatement.setString(6, info[6]);              
+
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "user wijzigt");
+         
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelOpleiding;
     private javax.swing.JPanel Profile_Panel;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btn_Opleiding;
     private javax.swing.JButton btn_Profile;
+    private javax.swing.JButton btn_save;
     private javax.swing.JButton ds;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTextField txt_Name;
