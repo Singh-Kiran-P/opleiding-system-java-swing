@@ -200,25 +200,26 @@ public class Login extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                String info[] = new String[6];
+                String info[] = new String[7];
                 info[0] = rs.getString("role");
                 info[1] = rs.getString("name");
                 info[2] = rs.getString("firstname");
                 info[3] = rs.getString("username");
                 info[4] = rs.getString("password");
                 info[5] = rs.getString("email");
+                info[6] = rs.getString("id");
 
                 if (rs.getString("role").equals("admin")) {
                     Admin_page mf = new Admin_page();
                     // set the jframe size and location, and make it visible
-                    mf.setPreferredSize(new Dimension(970, 404));
+                    mf.setPreferredSize(new Dimension(950, 350));
                     mf.pack();
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
+                    mf.listInladen();
                     mf.setInfo(info);
                     mf.main();
                     this.setVisible(false);
-                    mf.listInladen();
 
                 }
                 if (!rs.getString("role").equals("admin")) {

@@ -66,6 +66,7 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
             mf.setPreferredSize(new Dimension(970, 404));
             mf.pack();
             mf.main();
+            mf.listInladen();
             mf.setLocationRelativeTo(null);
             mf.setVisible(rootPaneCheckingEnabled);
 
