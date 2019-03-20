@@ -5,19 +5,32 @@
  */
 package jpanel.opleiding;
 
+import jpanel.opleiding.Login;
+import jpanel.opleiding.OpleidingToevoegen;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
  * @author singh
  */
 public class Admin_page extends javax.swing.JFrame {
+
+    private String[] info;
+    private int opleidingId;
+
+    public void setInfo(String[] info) {
+        this.info = info;
+    }
 
     /**
      * Creates new form Admin_page
@@ -40,6 +53,14 @@ public class Admin_page extends javax.swing.JFrame {
         list_opleiding = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         btn_Toevoegen = new javax.swing.JButton();
+        txt_opleiding = new javax.swing.JTextField();
+        txt_locatie = new javax.swing.JTextField();
+        txt_datum = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btn_verwijderen = new javax.swing.JButton();
+        btn_wijzigen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -75,6 +96,37 @@ public class Admin_page extends javax.swing.JFrame {
         });
         getContentPane().add(btn_Toevoegen);
         btn_Toevoegen.setBounds(40, 300, 140, 21);
+        getContentPane().add(txt_opleiding);
+        txt_opleiding.setBounds(350, 40, 240, 40);
+        getContentPane().add(txt_locatie);
+        txt_locatie.setBounds(350, 90, 240, 40);
+        getContentPane().add(txt_datum);
+        txt_datum.setBounds(350, 140, 240, 40);
+
+        jLabel1.setText("Datum");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(280, 150, 170, 13);
+
+        jLabel2.setText("Opleiding");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(280, 50, 70, 13);
+
+        jLabel3.setText("Locatie");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(280, 100, 110, 13);
+
+        btn_verwijderen.setText("Verwijderen");
+        getContentPane().add(btn_verwijderen);
+        btn_verwijderen.setBounds(500, 210, 90, 21);
+
+        btn_wijzigen.setText("Wijzigen");
+        btn_wijzigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_wijzigenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_wijzigen);
+        btn_wijzigen.setBounds(350, 210, 90, 21);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,13 +154,13 @@ public class Admin_page extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                model.addElement(rs.getString("opleiding"));
+                model.addElement(rs.getString("opleiding") + " (" + rs.getString("location") + ")");
 
                 //this.dispose();
             }
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
+        }
         list_opleiding.setModel(model);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -117,70 +169,150 @@ public class Admin_page extends javax.swing.JFrame {
 
         OpleidingToevoegen opleidingtoevoegen = new OpleidingToevoegen();
         opleidingtoevoegen.setVisible(rootPaneCheckingEnabled);
-        opleidingtoevoegen.setPreferredSize(new Dimension(346, 300));
+        opleidingtoevoegen.setPreferredSize(new Dimension(346, 324));
+
         opleidingtoevoegen.pack();
         opleidingtoevoegen.setLocationRelativeTo(null);
         opleidingtoevoegen.setVisible(rootPaneCheckingEnabled);
         this.setVisible(false);
+
     }//GEN-LAST:event_btn_ToevoegenActionPerformed
+
+    private void btn_wijzigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_wijzigenActionPerformed
+        // TODO add your handling code here:
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "UPDATE `opleiding` SET `opleiding` = ?, `location` = ?, `datum` = ? WHERE `opleiding`.`id` = ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1,);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                txt_opleiding.setText(rs.getString("opleiding"));
+                txt_datum.setText(rs.getString("datum"));
+                txt_locatie.setText(rs.getString("location"));
+
+                //this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btn_wijzigenActionPerformed
+
+    public static void main(String[] args) {
+    }
+
+    public void main() {
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList<String> theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                        Object o = theList.getModel().getElementAt(index);
+                        String[] parts = o.toString().split(" ");
+                        String opleiding_naam = parts[0];
+                        
+                        System.out.println(opleiding_naam);
+                        showOpleidingInfo(opleiding_naam);
+                        
+
+                    }
+                }
+            }
+        };
+        list_opleiding.addMouseListener(mouseListener);
+        txt_opleiding.hide();
+        txt_locatie.hide();
+        txt_datum.hide();
+        jLabel1.hide();
+        jLabel2.hide();
+        jLabel3.hide();
+        btn_wijzigen.hide();
+        btn_verwijderen.hide();
+
+    }
+
+    public void showOpleidingInfo(String opleidingNaam) {
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM `opleiding` WHERE opleiding like ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, opleidingNaam);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                txt_opleiding.setText(rs.getString("opleiding"));
+                txt_datum.setText(rs.getString("datum"));
+                txt_locatie.setText(rs.getString("location"));
+
+                txt_opleiding.setVisible(true);
+                txt_locatie.setVisible(true);
+                txt_datum.setVisible(true);
+                jLabel1.setVisible(true);
+                jLabel2.setVisible(true);
+                jLabel3.setVisible(true);
+                btn_wijzigen.setVisible(true);
+                btn_verwijderen.setVisible(true);
+                //this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin_page.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Admin_page().setVisible(false);
-                new Admin_page().listInladen();
-            }
-
-        });
-
-    }
-
     public void listInladen() {
 
-        DefaultListModel model = new DefaultListModel();
-        model.addElement("hello");
-        model.addElement("hello");
-        model.addElement("hello");
+        PreparedStatement ps;
+        ResultSet rs;
 
-        list_opleiding.setModel(model);
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * FROM `opleiding`";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                model.addElement(rs.getString("opleiding") + " (" + rs.getString("location") + ")");
+                
+                //this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Toevoegen;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_verwijderen;
+    private javax.swing.JButton btn_wijzigen;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> list_opleiding;
+    private javax.swing.JTextField txt_datum;
+    private javax.swing.JTextField txt_locatie;
+    private javax.swing.JTextField txt_opleiding;
     // End of variables declaration//GEN-END:variables
 }

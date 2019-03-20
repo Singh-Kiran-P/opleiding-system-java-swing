@@ -7,6 +7,7 @@ package jpanel.opleiding;
 
 // Java program to check if an email address 
 // is valid using Regex. 
+import jpanel.opleiding.Login;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.WindowEvent;
@@ -186,7 +187,7 @@ public class Register extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 203));
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\singh\\Downloads\\user (3).png")); // NOI18N
 

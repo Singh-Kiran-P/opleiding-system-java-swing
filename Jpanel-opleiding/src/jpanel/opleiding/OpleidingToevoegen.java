@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
@@ -47,11 +48,16 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
-                    .prepareStatement("INSERT INTO `opleiding` (`id`,`opleiding`,`location`, `userId`) VALUES (NULL,?, ?, '0')");
+                    .prepareStatement("INSERT INTO `opleiding` (`id`,`opleiding`,`location`,`datum`, `userId`) VALUES (NULL,?, ?, ?,'0')");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
             preparedStatement.setString(1, txt_opleiding.getText());
             preparedStatement.setString(2, txt_locatie.getText());
+
+            String sDate1 = txt_datum.getText();
+      
+
+            preparedStatement.setDate(3, java.sql.Date.valueOf(sDate1));
 
             preparedStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Opleiding Toegevoegd");
@@ -59,9 +65,10 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
             // set the jframe size and location, and make it visible
             mf.setPreferredSize(new Dimension(970, 404));
             mf.pack();
+            mf.main();
             mf.setLocationRelativeTo(null);
             mf.setVisible(rootPaneCheckingEnabled);
-           
+
             this.setVisible(false);
 
         } catch (Exception e) {
@@ -92,6 +99,8 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
         txt_opleiding = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txt_datum = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -109,7 +118,7 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_toevoegen);
-        btn_toevoegen.setBounds(100, 190, 130, 30);
+        btn_toevoegen.setBounds(100, 250, 130, 30);
         getContentPane().add(txt_locatie);
         txt_locatie.setBounds(50, 140, 240, 30);
         getContentPane().add(txt_opleiding);
@@ -122,6 +131,12 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
         jLabel3.setText("Locatie");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(50, 120, 140, 13);
+        getContentPane().add(txt_datum);
+        txt_datum.setBounds(50, 200, 240, 30);
+
+        jLabel4.setText("Datum");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 180, 140, 13);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,44 +153,16 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OpleidingToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OpleidingToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OpleidingToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OpleidingToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OpleidingToevoegen().setVisible(true);
-
-            }
-        });
-    }
+  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_toevoegen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txt_datum;
     private javax.swing.JTextField txt_locatie;
     private javax.swing.JTextField txt_opleiding;
     // End of variables declaration//GEN-END:variables

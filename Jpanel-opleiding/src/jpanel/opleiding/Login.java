@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.util.Date;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
@@ -69,7 +70,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 203));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\singh\\Documents\\School\\KTA1-HASSELT\\Stage\\opleiding-system-java\\Jpanel-opleiding\\login.png")); // NOI18N
@@ -199,11 +200,13 @@ public class Login extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                String info[] = new String[1];
-                info[0] = rs.getString("username");
-                info[0] = rs.getString("username");
-                info[0] = rs.getString("username");
-                info[0] = rs.getString("username");
+                String info[] = new String[6];
+                info[0] = rs.getString("role");
+                info[1] = rs.getString("name");
+                info[2] = rs.getString("firstname");
+                info[3] = rs.getString("username");
+                info[4] = rs.getString("password");
+                info[5] = rs.getString("email");
 
                 if (rs.getString("role").equals("admin")) {
                     Admin_page mf = new Admin_page();
@@ -212,8 +215,10 @@ public class Login extends javax.swing.JFrame {
                     mf.pack();
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
-                    mf.main(info);
+                    mf.setInfo(info);
+                    mf.main();
                     this.setVisible(false);
+                    mf.listInladen();
 
                 }
                 if (!rs.getString("role").equals("admin")) {
@@ -223,7 +228,8 @@ public class Login extends javax.swing.JFrame {
                     mf.pack();
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
-                    mf.main(info);
+                    mf.setInfo(info);
+                    mf.inLaden();
                     this.setVisible(false);
 
                 }

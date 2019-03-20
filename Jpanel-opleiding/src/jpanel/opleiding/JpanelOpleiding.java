@@ -5,6 +5,8 @@
  */
 package jpanel.opleiding;
 
+import jpanel.opleiding.Login;
+
 /**
  *
  * @author singh
