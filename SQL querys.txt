@@ -1,0 +1,4 @@
+SELECT * FROM `opleiding` INNER JOIN `user_opleiding` ON `opleiding`.`id` = `user_opleiding`.`opleidingId` && user_opleiding.userId = 14
+
+voor opleiding per user
+SELECT `opleiding`.`opleiding` FROM `opleiding` INNER JOIN `user_opleiding` ON `opleiding`.`id` = `user_opleiding`.`opleidingId` && user_opleiding.userId = 14
