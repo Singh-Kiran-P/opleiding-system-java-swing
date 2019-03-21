@@ -125,7 +125,9 @@ public class Home_AllOpleidingen extends javax.swing.JFrame {
         mf.setTitle("Opleiding System");
         mf.setLocationRelativeTo(null);
         mf.setVisible(rootPaneCheckingEnabled);
-        mf.home();
+        mf.opleidingSHow();
+        mf.main();
+        mf.list_OpleidingLaden();
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -161,6 +163,8 @@ public class Home_AllOpleidingen extends javax.swing.JFrame {
             mf.setLocationRelativeTo(null);
             mf.setVisible(rootPaneCheckingEnabled);
             mf.opleidingSHow();
+            mf.main();
+            mf.inLaden();
             mf.list_OpleidingLaden();
             this.setVisible(false);
 

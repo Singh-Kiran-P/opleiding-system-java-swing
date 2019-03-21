@@ -234,7 +234,7 @@ public class Login extends javax.swing.JFrame {
                     mf.setTitle("Opleiding System");
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
-
+                    mf.main();
                     mf.inLaden();
                     this.setVisible(false);
 

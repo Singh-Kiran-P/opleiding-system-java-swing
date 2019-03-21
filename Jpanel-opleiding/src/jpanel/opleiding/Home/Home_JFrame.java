@@ -5,7 +5,11 @@
  */
 package jpanel.opleiding.Home;
 
+import jpanel.opleiding.Auth.Login;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,15 +18,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
-import javax.swing.border.Border;
-import jpanel.opleiding.Auth.Login;
-import jpanel.opleiding.Auth.Login;
-import jpanel.opleiding.Auth.Login;
-import jpanel.opleiding.MyConnection;
 import jpanel.opleiding.MyConnection;
 
 /**
@@ -59,6 +58,8 @@ public class Home_JFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         list_opleiding = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        btn_Survey = new javax.swing.JButton();
+        btn_Verwwijder = new javax.swing.JButton();
         Profile_Panel = new javax.swing.JPanel();
         txt_username = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JLabel();
@@ -92,7 +93,7 @@ public class Home_JFrame extends javax.swing.JFrame {
             }
         });
         PanelOpleiding.add(btn_AllOpleidingen);
-        btn_AllOpleidingen.setBounds(20, 420, 130, 20);
+        btn_AllOpleidingen.setBounds(20, 380, 300, 30);
 
         jScrollPane1.setViewportView(list_opleiding);
 
@@ -102,6 +103,19 @@ public class Home_JFrame extends javax.swing.JFrame {
         jLabel1.setText("Mijn Opleidingen");
         PanelOpleiding.add(jLabel1);
         jLabel1.setBounds(20, 20, 160, 13);
+
+        btn_Survey.setText("Take Survey ");
+        PanelOpleiding.add(btn_Survey);
+        btn_Survey.setBounds(360, 90, 180, 30);
+
+        btn_Verwwijder.setText("Verwijder deze opleiding");
+        btn_Verwwijder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VerwwijderActionPerformed(evt);
+            }
+        });
+        PanelOpleiding.add(btn_Verwwijder);
+        btn_Verwwijder.setBounds(360, 40, 180, 30);
 
         getContentPane().add(PanelOpleiding);
         PanelOpleiding.setBounds(230, 0, 580, 460);
@@ -234,6 +248,9 @@ public class Home_JFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Profile_Panel.setVisible(false);
         PanelOpleiding.setVisible(true);
+        btn_Survey.setVisible(false);
+        btn_Verwwijder.setVisible(false);
+
         list_OpleidingLaden();
     }//GEN-LAST:event_btn_OpleidingActionPerformed
 
@@ -268,6 +285,15 @@ public class Home_JFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_AllOpleidingenActionPerformed
 
+    private void btn_VerwwijderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VerwwijderActionPerformed
+        try {
+            // TODO add your handling code here:
+            verwijder_opleiding_DB();
+        } catch (Exception ex) {
+            Logger.getLogger(Home_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_VerwwijderActionPerformed
+
     public void inLaden() {
 
         getUserData();
@@ -286,6 +312,32 @@ public class Home_JFrame extends javax.swing.JFrame {
         Profile_Panel.setVisible(false);
         PanelOpleiding.setVisible(true);
         sidePanel.setVisible(true);
+        btn_Survey.setVisible(false);
+        btn_Verwwijder.setVisible(false);
+    }
+
+    public void main() {
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList<String> theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                        Object o = theList.getModel().getElementAt(index);
+                        String[] parts = o.toString().split("°");
+                        String opleiding_Id = parts[1];
+                        System.out.println(opleiding_Id);
+
+                        btn_Survey.setVisible(true);
+                        btn_Verwwijder.setVisible(true);
+
+                    }
+                }
+            }
+        };
+        list_opleiding.addMouseListener(mouseListener);
+
     }
 
     /**
@@ -421,6 +473,43 @@ public class Home_JFrame extends javax.swing.JFrame {
         }
     }
 
+    public void verwijder_opleiding_DB() throws Exception {
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/stagedb?"
+                            + "user=root&password=");
+
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect
+                    .prepareStatement("DELETE FROM `user_opleiding` WHERE `user_opleiding`.`userId` = ? && `user_opleiding`.`opleidingId` = ?");
+            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            // Parameters start with 1
+            int firstSelIx = list_opleiding.getSelectedIndex();
+            Object sel = list_opleiding.getModel().getElementAt(firstSelIx);
+            String string = sel.toString();
+            String[] parts = string.split("°");
+            String opleidingId = parts[1];
+
+            var userId = Login.user_Data.getId();
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, opleidingId);
+
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Opleiding verwijderd van u profile");
+
+            list_OpleidingLaden();
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelOpleiding;
     private javax.swing.JPanel Profile_Panel;
@@ -428,6 +517,8 @@ public class Home_JFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_AllOpleidingen;
     private javax.swing.JButton btn_Opleiding;
     private javax.swing.JButton btn_Profile;
+    private javax.swing.JButton btn_Survey;
+    private javax.swing.JButton btn_Verwwijder;
     private javax.swing.JButton btn_save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
