@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpanel.opleiding;
+package jpanel.opleiding.Admin;
 
-import jpanel.opleiding.Login;
-import jpanel.opleiding.OpleidingToevoegen;
+import jpanel.opleiding.Auth.Login;
+import jpanel.opleiding.Admin.OpleidingToevoegen;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import jpanel.opleiding.MyConnection;
 import jpanel.opleiding.MyConnection;
 
 /**
@@ -119,7 +121,7 @@ public class Admin_page extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(350, 10, 70, 13);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 203));
         jPanel1.setLayout(null);
 
         btn_verwijderen.setText("Verwijderen");
@@ -163,7 +165,7 @@ public class Admin_page extends javax.swing.JFrame {
         btn_survey.setBounds(800, 30, 140, 20);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 990, 390);
+        jPanel1.setBounds(0, 0, 950, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -344,6 +346,8 @@ public class Admin_page extends javax.swing.JFrame {
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+
         list_opleiding.setModel(model);
 
     }

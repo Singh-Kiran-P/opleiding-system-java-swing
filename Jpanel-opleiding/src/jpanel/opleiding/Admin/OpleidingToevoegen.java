@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpanel.opleiding;
+package jpanel.opleiding.Admin;
 
 import java.awt.Dimension;
 import java.sql.PreparedStatement;
@@ -48,14 +48,13 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
-                    .prepareStatement("INSERT INTO `opleiding` (`id`,`opleiding`,`location`,`datum`, `userId`) VALUES (NULL,?, ?, ?,'0')");
+                    .prepareStatement("INSERT INTO `opleiding` (`id`,`opleiding`,`location`,`datum`) VALUES (NULL,?, ?, ?)");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
             preparedStatement.setString(1, txt_opleiding.getText());
             preparedStatement.setString(2, txt_locatie.getText());
 
             String sDate1 = txt_datum.getText();
-      
 
             preparedStatement.setDate(3, java.sql.Date.valueOf(sDate1));
 
@@ -102,8 +101,11 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_datum = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(240, 240, 241));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -139,6 +141,32 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(50, 180, 140, 13);
 
+        jPanel3.setBackground(new java.awt.Color(0, 102, 204));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("<");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(0, 0, 31, 29);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,11 +179,25 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_toevoegenActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        Admin_page mf = new Admin_page();
+        // set the jframe size and location, and make it visible
+        mf.setPreferredSize(new Dimension(950, 350));
+        mf.pack();
+        mf.setTitle("Opleiding System");
+        mf.main();
+        mf.listInladen();
+        mf.setLocationRelativeTo(null);
+        mf.setVisible(rootPaneCheckingEnabled);
+
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
-  
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_toevoegen;
@@ -163,6 +205,8 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txt_datum;
     private javax.swing.JTextField txt_locatie;
     private javax.swing.JTextField txt_opleiding;

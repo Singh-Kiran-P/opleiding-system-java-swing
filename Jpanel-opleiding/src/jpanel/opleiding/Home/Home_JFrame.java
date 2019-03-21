@@ -3,19 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpanel.opleiding;
+package jpanel.opleiding.Home;
 
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import javax.swing.border.Border;
-import jpanel.opleiding.Login;
+import jpanel.opleiding.Auth.Login;
+import jpanel.opleiding.Auth.Login;
+import jpanel.opleiding.Auth.Login;
+import jpanel.opleiding.MyConnection;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
@@ -46,6 +54,11 @@ public class Home_JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelOpleiding = new javax.swing.JPanel();
+        btn_AllOpleidingen = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        list_opleiding = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
         Profile_Panel = new javax.swing.JPanel();
         txt_username = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JLabel();
@@ -58,8 +71,10 @@ public class Home_JFrame extends javax.swing.JFrame {
         txt_role = new javax.swing.JTextField();
         txt_username4 = new javax.swing.JLabel();
         btn_save = new javax.swing.JButton();
-        PanelOpleiding = new javax.swing.JPanel();
-        ds = new javax.swing.JButton();
+        txt_username5 = new javax.swing.JLabel();
+        txt_gender = new javax.swing.JTextField();
+        txt_geboorteDatum = new javax.swing.JTextField();
+        txt_username6 = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
         btn_Profile = new javax.swing.JButton();
         btn_Opleiding = new javax.swing.JButton();
@@ -68,15 +83,60 @@ public class Home_JFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        PanelOpleiding.setLayout(null);
+
+        btn_AllOpleidingen.setText("All Opleidingen");
+        btn_AllOpleidingen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AllOpleidingenActionPerformed(evt);
+            }
+        });
+        PanelOpleiding.add(btn_AllOpleidingen);
+        btn_AllOpleidingen.setBounds(20, 420, 130, 20);
+
+        jScrollPane1.setViewportView(list_opleiding);
+
+        PanelOpleiding.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 40, 300, 330);
+
+        jLabel1.setText("Mijn Opleidingen");
+        PanelOpleiding.add(jLabel1);
+        jLabel1.setBounds(20, 20, 160, 13);
+
+        getContentPane().add(PanelOpleiding);
+        PanelOpleiding.setBounds(230, 0, 580, 460);
+
+        Profile_Panel.setLayout(null);
+
         txt_username.setText("email");
+        Profile_Panel.add(txt_username);
+        txt_username.setBounds(100, 230, 60, 20);
 
         txt_username1.setText("Name");
+        Profile_Panel.add(txt_username1);
+        txt_username1.setBounds(100, 30, 60, 20);
 
         txt_username2.setText("Firstname");
+        Profile_Panel.add(txt_username2);
+        txt_username2.setBounds(100, 70, 160, 20);
 
         txt_username3.setText("Username");
+        Profile_Panel.add(txt_username3);
+        txt_username3.setBounds(100, 190, 80, 20);
+        Profile_Panel.add(txt_email);
+        txt_email.setBounds(200, 230, 230, 30);
+        Profile_Panel.add(txt_Name);
+        txt_Name.setBounds(200, 30, 230, 30);
+        Profile_Panel.add(txt_firstname);
+        txt_firstname.setBounds(200, 70, 230, 30);
+        Profile_Panel.add(txt_user);
+        txt_user.setBounds(200, 190, 230, 30);
+        Profile_Panel.add(txt_role);
+        txt_role.setBounds(200, 270, 230, 30);
 
         txt_username4.setText("role");
+        Profile_Panel.add(txt_username4);
+        txt_username4.setBounds(100, 270, 60, 20);
 
         btn_save.setText("Save");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -84,88 +144,23 @@ public class Home_JFrame extends javax.swing.JFrame {
                 btn_saveActionPerformed(evt);
             }
         });
+        Profile_Panel.add(btn_save);
+        btn_save.setBounds(250, 340, 114, 30);
 
-        javax.swing.GroupLayout Profile_PanelLayout = new javax.swing.GroupLayout(Profile_Panel);
-        Profile_Panel.setLayout(Profile_PanelLayout);
-        Profile_PanelLayout.setHorizontalGroup(
-            Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                                .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                                .addComponent(txt_username3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                                .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                                .addComponent(txt_username4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txt_role, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(210, 210, 210))
-        );
-        Profile_PanelLayout.setVerticalGroup(
-            Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Profile_PanelLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txt_username3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Profile_PanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_username4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_role, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        txt_username5.setText("Gender");
+        Profile_Panel.add(txt_username5);
+        txt_username5.setBounds(100, 110, 160, 20);
+        Profile_Panel.add(txt_gender);
+        txt_gender.setBounds(200, 110, 230, 30);
+        Profile_Panel.add(txt_geboorteDatum);
+        txt_geboorteDatum.setBounds(200, 150, 230, 30);
+
+        txt_username6.setText("Geboorte Datum");
+        Profile_Panel.add(txt_username6);
+        txt_username6.setBounds(100, 150, 200, 20);
 
         getContentPane().add(Profile_Panel);
         Profile_Panel.setBounds(230, 0, 580, 460);
-
-        PanelOpleiding.setLayout(null);
-
-        ds.setText("Opleidingen");
-        PanelOpleiding.add(ds);
-        ds.setBounds(190, 210, 87, 21);
-
-        getContentPane().add(PanelOpleiding);
-        PanelOpleiding.setBounds(230, 0, 580, 460);
 
         sidePanel.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -230,7 +225,7 @@ public class Home_JFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
-        // TODO add your handling code here:
+        getUserData();
         Profile_Panel.setVisible(true);
         PanelOpleiding.setVisible(false);
     }//GEN-LAST:event_btn_ProfileActionPerformed
@@ -239,6 +234,7 @@ public class Home_JFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Profile_Panel.setVisible(false);
         PanelOpleiding.setVisible(true);
+        list_OpleidingLaden();
     }//GEN-LAST:event_btn_OpleidingActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -256,15 +252,40 @@ public class Home_JFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_saveActionPerformed
 
+    private void btn_AllOpleidingenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AllOpleidingenActionPerformed
+        // TODO add your handling code here:
+
+        Home_AllOpleidingen mf = new Home_AllOpleidingen();
+        // set the jframe size and location, and make it visible
+        mf.setPreferredSize(new Dimension(361, 450));
+        mf.pack();
+        mf.setTitle("Opleiding System");
+        mf.setLocationRelativeTo(null);
+        mf.setVisible(rootPaneCheckingEnabled);
+        mf.list_OpleidingLaden();
+
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btn_AllOpleidingenActionPerformed
+
     public void inLaden() {
-        txt_user.setText(info[3]);
-        txt_role.setText(info[0]);
-        txt_Name.setText(info[1]);
-        txt_firstname.setText(info[2]);
-        txt_email.setText(info[4]);
+
+        getUserData();
         Profile_Panel.setVisible(false);
         PanelOpleiding.setVisible(false);
 
+    }
+
+    public void home() {
+        Profile_Panel.setVisible(false);
+        PanelOpleiding.setVisible(false);
+        sidePanel.setVisible(true);
+    }
+
+    public void opleidingSHow() {
+        Profile_Panel.setVisible(false);
+        PanelOpleiding.setVisible(true);
+        sidePanel.setVisible(true);
     }
 
     /**
@@ -320,19 +341,20 @@ public class Home_JFrame extends javax.swing.JFrame {
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
-                    .prepareStatement("UPDATE `user` SET `role` = ?, `name` = ?, `firstname` = ?, `username` = ?, `email` = ? WHERE `user`.`id` = ?");
+                    .prepareStatement("UPDATE `user` SET `name` = ?, `firstname` = ?, `gender`=?,`birthDate` = ?, `email` = ? WHERE `user`.`id` = ?");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
-            preparedStatement.setString(1, txt_role.getText());
-            preparedStatement.setString(2, txt_Name.getText());
-            preparedStatement.setString(3, txt_firstname.getText());
-            preparedStatement.setString(4, txt_user.getText());
+            preparedStatement.setString(1, txt_Name.getText());
+            preparedStatement.setString(2, txt_firstname.getText());
             preparedStatement.setString(5, txt_email.getText());
-            preparedStatement.setString(6, info[6]);              
+            preparedStatement.setString(3, txt_gender.getText());
+            preparedStatement.setString(4, txt_geboorteDatum.getText());
+
+            var userId = Login.user_Data.getId();
+            preparedStatement.setString(6, userId);
 
             preparedStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "user wijzigt");
-         
 
         } catch (Exception e) {
             throw e;
@@ -340,18 +362,82 @@ public class Home_JFrame extends javax.swing.JFrame {
 
     }
 
+    public void list_OpleidingLaden() {
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * FROM `opleiding` INNER JOIN `user_opleiding` ON `opleiding`.`id` = `user_opleiding`.`opleidingId` && user_opleiding.userId = ? ";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            var user_data = Login.user_Data;
+            ps.setString(1, user_data.getId());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                model.addElement(rs.getString("opleiding") + "                                                                                                                                                  °" + rs.getString("id") + "");
+
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        list_opleiding.setModel(model);
+
+    }
+
+    public void getUserData() {
+        // TODO add your handling code here:
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM `user` WHERE id =  ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            var user_data = Login.user_Data;
+            ps.setString(1, user_data.getId());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                txt_Name.setText(rs.getString("name"));
+                txt_firstname.setText(rs.getString("firstname"));
+                txt_gender.setText(rs.getString("gender"));
+                txt_geboorteDatum.setText(rs.getString("birthDate"));
+
+                txt_user.setText(rs.getString("username"));
+                txt_email.setText(rs.getString("email"));
+                txt_role.setText(rs.getString("role"));
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelOpleiding;
     private javax.swing.JPanel Profile_Panel;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btn_AllOpleidingen;
     private javax.swing.JButton btn_Opleiding;
     private javax.swing.JButton btn_Profile;
     private javax.swing.JButton btn_save;
-    private javax.swing.JButton ds;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list_opleiding;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTextField txt_Name;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_firstname;
+    private javax.swing.JTextField txt_geboorteDatum;
+    private javax.swing.JTextField txt_gender;
     private javax.swing.JTextField txt_role;
     private javax.swing.JTextField txt_user;
     private javax.swing.JLabel txt_username;
@@ -359,5 +445,7 @@ public class Home_JFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txt_username2;
     private javax.swing.JLabel txt_username3;
     private javax.swing.JLabel txt_username4;
+    private javax.swing.JLabel txt_username5;
+    private javax.swing.JLabel txt_username6;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpanel.opleiding;
+package jpanel.opleiding.Auth;
 // Java program to check if an email address 
 // is valid using Regex. 
 
+import jpanel.opleiding.Home.Home_JFrame;
 import java.awt.Dimension;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +23,9 @@ import java.sql.Statement;
 import java.util.Date;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
+import jpanel.opleiding.Admin.Admin_page;
+import jpanel.opleiding.Home.userData;
+import jpanel.opleiding.MyConnection;
 import jpanel.opleiding.MyConnection;
 
 /**
@@ -70,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 203));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\singh\\Documents\\School\\KTA1-HASSELT\\Stage\\opleiding-system-java\\Jpanel-opleiding\\login.png")); // NOI18N
@@ -182,7 +186,7 @@ public class Login extends javax.swing.JFrame {
     private void txt_UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_UsernameActionPerformed
-
+    public static userData user_Data;
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         PreparedStatement ps;
         ResultSet rs;
@@ -200,26 +204,25 @@ public class Login extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                String info[] = new String[7];
-                info[0] = rs.getString("role");
-                info[1] = rs.getString("name");
-                info[2] = rs.getString("firstname");
-                info[3] = rs.getString("username");
-                info[4] = rs.getString("password");
-                info[5] = rs.getString("email");
-                info[6] = rs.getString("id");
+                user_Data = new userData();
+                user_Data.setId(rs.getString("id"));
+                user_Data.setRole(rs.getString("role"));
+                user_Data.setName(rs.getString("name"));
+                user_Data.setFirstname(rs.getString("firstname"));
+                user_Data.setUsername(rs.getString("username"));
+                user_Data.setEmail(rs.getString("email"));
 
                 if (rs.getString("role").equals("admin")) {
                     Admin_page mf = new Admin_page();
                     // set the jframe size and location, and make it visible
                     mf.setPreferredSize(new Dimension(950, 350));
                     mf.pack();
+                    mf.setTitle("Opleiding System");
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
                     mf.listInladen();
-                    mf.setInfo(info);
                     mf.main();
-                    
+
                     this.setVisible(false);
 
                 }
@@ -228,9 +231,10 @@ public class Login extends javax.swing.JFrame {
                     // set the jframe size and location, and make it visible
                     mf.setPreferredSize(new Dimension(800, 500));
                     mf.pack();
+                    mf.setTitle("Opleiding System");
                     mf.setLocationRelativeTo(null);
                     mf.setVisible(rootPaneCheckingEnabled);
-                    mf.setInfo(info);
+
                     mf.inLaden();
                     this.setVisible(false);
 

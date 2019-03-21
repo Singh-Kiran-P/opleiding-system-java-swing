@@ -5,7 +5,7 @@
  */
 package jpanel.opleiding;
 
-import jpanel.opleiding.Login;
+import jpanel.opleiding.Auth.Login;
 
 /**
  *

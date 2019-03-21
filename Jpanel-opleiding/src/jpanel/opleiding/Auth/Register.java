@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpanel.opleiding;
+package jpanel.opleiding.Auth;
 
 // Java program to check if an email address 
 // is valid using Regex. 
-import jpanel.opleiding.Login;
+import jpanel.opleiding.Auth.Login;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.WindowEvent;
@@ -55,7 +55,7 @@ public class Register extends javax.swing.JFrame {
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
-                    .prepareStatement("INSERT INTO `user` (`id`,`role`,`name`, `firstname`, `username`, `password`, `email`, `active`) VALUES (NULL, 'student' , ?, ?,?, ?,?, '0')");
+                    .prepareStatement("INSERT INTO `user` (`id`,`role`,`name`, `firstname`,`gender`,`birthDate`, `username`, `password`, `email`, `active`) VALUES (NULL, 'student' , ?, ?,'','',?, ?,?, '0')");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
             preparedStatement.setString(1, txt_Name.getText());
@@ -187,7 +187,7 @@ public class Register extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 203));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 204));
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\singh\\Downloads\\user (3).png")); // NOI18N
 

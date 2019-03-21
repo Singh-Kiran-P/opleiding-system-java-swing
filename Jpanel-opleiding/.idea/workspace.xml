@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d67487-8f6c-4db5-8d49-475b5adffbd3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/Admin_page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/Admin_page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/OpleidingToevoegen.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/OpleidingToevoegen.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/OpleidingToevoegen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/OpleidingToevoegen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jpanel/opleiding/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpanel/opleiding/Register.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +18,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Login.form">
           <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
@@ -70,8 +74,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -108,8 +112,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -140,18 +145,12 @@
     <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Register.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Login.form">
+    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/f.java" />
+    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/f.jfd" />
+    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/f.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/f.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Home_JFrame.form">
+    <entry file="file://$PROJECT_DIR$/src/jpanel/opleiding/Login.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
   </component>
