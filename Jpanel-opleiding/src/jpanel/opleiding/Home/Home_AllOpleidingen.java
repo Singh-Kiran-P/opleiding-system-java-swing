@@ -164,7 +164,6 @@ public class Home_AllOpleidingen extends javax.swing.JFrame {
             mf.setVisible(rootPaneCheckingEnabled);
             mf.opleidingSHow();
             mf.main();
-            mf.inLaden();
             mf.list_OpleidingLaden();
             this.setVisible(false);
 
