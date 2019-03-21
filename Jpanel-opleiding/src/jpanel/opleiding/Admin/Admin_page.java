@@ -72,7 +72,8 @@ public class Admin_page extends javax.swing.JFrame {
         btn_verwijderen = new javax.swing.JButton();
         btn_Toevoegen = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
-        btn_survey = new javax.swing.JButton();
+        btn_surveyToevoegen = new javax.swing.JButton();
+        btn_surveyTonen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -160,12 +161,16 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_logout);
         btn_logout.setBounds(840, 280, 100, 21);
 
-        btn_survey.setText("survey Toevoegen");
-        jPanel1.add(btn_survey);
-        btn_survey.setBounds(800, 30, 140, 20);
+        btn_surveyToevoegen.setText("survey Tonen");
+        jPanel1.add(btn_surveyToevoegen);
+        btn_surveyToevoegen.setBounds(800, 60, 140, 20);
+
+        btn_surveyTonen.setText("survey Toevoegen");
+        jPanel1.add(btn_surveyTonen);
+        btn_surveyTonen.setBounds(800, 30, 140, 20);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 950, 310);
+        jPanel1.setBounds(0, 0, 950, 370);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -278,7 +283,8 @@ public class Admin_page extends javax.swing.JFrame {
         jLabel3.hide();
         btn_wijzigen.hide();
         btn_verwijderen.hide();
-        btn_survey.hide();
+        btn_surveyToevoegen.hide();
+        btn_surveyTonen.hide();
 
     }
 
@@ -311,7 +317,8 @@ public class Admin_page extends javax.swing.JFrame {
                 jLabel3.setVisible(true);
                 btn_wijzigen.setVisible(true);
                 btn_verwijderen.setVisible(true);
-                btn_survey.setVisible(true);
+                btn_surveyToevoegen.setVisible(true);
+                btn_surveyTonen.setVisible(true);
 
                 // this.dispose();
             }
@@ -424,7 +431,8 @@ public class Admin_page extends javax.swing.JFrame {
             jLabel3.hide();
             btn_wijzigen.hide();
             btn_verwijderen.hide();
-            btn_survey.hide();
+            btn_surveyToevoegen.hide();
+            btn_surveyTonen.hide();
 
             listInladen();
 
@@ -438,7 +446,8 @@ public class Admin_page extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Toevoegen;
     private javax.swing.JButton btn_logout;
-    private javax.swing.JButton btn_survey;
+    private javax.swing.JButton btn_surveyToevoegen;
+    private javax.swing.JButton btn_surveyTonen;
     private javax.swing.JButton btn_verwijderen;
     private javax.swing.JButton btn_wijzigen;
     private javax.swing.JLabel jLabel1;

@@ -215,7 +215,7 @@ public class Login extends javax.swing.JFrame {
                 if (rs.getString("role").equals("admin")) {
                     Admin_page mf = new Admin_page();
                     // set the jframe size and location, and make it visible
-                    mf.setPreferredSize(new Dimension(950, 350));
+                    mf.setPreferredSize(new Dimension(950, 345));
                     mf.pack();
                     mf.setTitle("Opleiding System");
                     mf.setLocationRelativeTo(null);
@@ -229,7 +229,7 @@ public class Login extends javax.swing.JFrame {
                 if (!rs.getString("role").equals("admin")) {
                     Home_JFrame mf = new Home_JFrame();
                     // set the jframe size and location, and make it visible
-                    mf.setPreferredSize(new Dimension(800, 500));
+                    mf.setPreferredSize(new Dimension(812, 490 ));
                     mf.pack();
                     mf.setTitle("Opleiding System");
                     mf.setLocationRelativeTo(null);
