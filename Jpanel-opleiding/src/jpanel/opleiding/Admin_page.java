@@ -78,7 +78,7 @@ public class Admin_page extends javax.swing.JFrame {
         jScrollPane1.setViewportView(list_opleiding);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 10, 170, 250);
+        jScrollPane1.setBounds(20, 10, 210, 250);
         getContentPane().add(txt_opleiding);
         txt_opleiding.setBounds(350, 80, 240, 40);
 
@@ -147,7 +147,7 @@ public class Admin_page extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_Toevoegen);
-        btn_Toevoegen.setBounds(20, 280, 170, 21);
+        btn_Toevoegen.setBounds(20, 280, 210, 21);
 
         btn_logout.setText("Logout");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {

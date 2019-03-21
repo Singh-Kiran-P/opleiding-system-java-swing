@@ -63,7 +63,7 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Opleiding Toegevoegd");
             Admin_page mf = new Admin_page();
             // set the jframe size and location, and make it visible
-            mf.setPreferredSize(new Dimension(970, 404));
+            mf.setPreferredSize(new Dimension(950, 350));
             mf.pack();
             mf.main();
             mf.listInladen();
