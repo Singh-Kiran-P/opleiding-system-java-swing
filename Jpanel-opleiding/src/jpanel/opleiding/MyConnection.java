@@ -6,20 +6,8 @@
 package jpanel.opleiding;
 // Java program to check if an email address 
 // is valid using Regex. 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.awt.event.WindowEvent;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import static javax.management.remote.JMXConnectorFactory.connect;
-import javax.swing.JOptionPane;
 
 /**
  *

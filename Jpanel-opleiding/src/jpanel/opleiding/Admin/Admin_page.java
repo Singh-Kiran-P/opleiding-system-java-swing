@@ -74,6 +74,7 @@ public class Admin_page extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         btn_surveyToevoegen = new javax.swing.JButton();
         btn_surveyTonen = new javax.swing.JButton();
+        btn_logout1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -152,22 +153,42 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_Toevoegen);
         btn_Toevoegen.setBounds(20, 280, 210, 21);
 
-        btn_logout.setText("Logout");
+        btn_logout.setText(" Gebruikersbeheer");
+        btn_logout.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
             }
         });
         jPanel1.add(btn_logout);
-        btn_logout.setBounds(840, 280, 100, 21);
+        btn_logout.setBounds(790, 250, 150, 20);
 
         btn_surveyToevoegen.setText("survey Tonen");
+        btn_surveyToevoegen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_surveyToevoegenActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_surveyToevoegen);
         btn_surveyToevoegen.setBounds(800, 60, 140, 20);
 
         btn_surveyTonen.setText("survey Toevoegen");
+        btn_surveyTonen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_surveyTonenActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_surveyTonen);
         btn_surveyTonen.setBounds(800, 30, 140, 20);
+
+        btn_logout1.setText("Logout");
+        btn_logout1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logout1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_logout1);
+        btn_logout1.setBounds(840, 280, 100, 21);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 950, 370);
@@ -191,6 +212,35 @@ public class Admin_page extends javax.swing.JFrame {
     private void btn_verwijderenAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btn_verwijderenAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_verwijderenAncestorAdded
+
+    private void btn_logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logout1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_logout1ActionPerformed
+
+    private void btn_surveyTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_surveyTonenActionPerformed
+        // TODO add your handling code here:
+        SurveyToevoegen st = new SurveyToevoegen();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(737, 332));
+
+        st.pack();
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btn_surveyTonenActionPerformed
+
+    private void btn_surveyToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_surveyToevoegenActionPerformed
+        // TODO add your handling code here:
+        SurveyTonen st = new SurveyTonen();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(737, 332));
+
+        st.pack();
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_surveyToevoegenActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
@@ -256,7 +306,7 @@ public class Admin_page extends javax.swing.JFrame {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
                 JList<String> theList = (JList) mouseEvent.getSource();
-                if (mouseEvent.getClickCount() == 2) {
+                if (mouseEvent.getClickCount() == 1) {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                         Object o = theList.getModel().getElementAt(index);
@@ -446,6 +496,7 @@ public class Admin_page extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Toevoegen;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_logout1;
     private javax.swing.JButton btn_surveyToevoegen;
     private javax.swing.JButton btn_surveyTonen;
     private javax.swing.JButton btn_verwijderen;

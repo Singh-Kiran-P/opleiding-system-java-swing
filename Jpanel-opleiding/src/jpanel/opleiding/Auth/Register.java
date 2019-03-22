@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.util.Date;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
@@ -64,9 +65,9 @@ public class Register extends javax.swing.JFrame {
             preparedStatement.setString(4, pass);
             preparedStatement.setString(5, txt_Email.getText());
             preparedStatement.executeUpdate();
-            JOptionPane.showMessageDialog(null, "User created");  
-            this.setVisible(false);            
-            
+            JOptionPane.showMessageDialog(null, "User created");
+            this.setVisible(false);
+
             new Login().setVisible(true);
 
         } catch (Exception e) {
@@ -349,14 +350,68 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisterActionPerformed
-        try {
-            // TODO add your handling code here:
-            readDataBase();
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        if (txt_Name.equals("")) {
+            JOptionPane.showMessageDialog(null, "Name is required");
+
+        }
+        if (txt_Firstname.equals("")) {
+            JOptionPane.showMessageDialog(null, "Firstname is required");
+
+        }
+        if (txt_Username.equals("")) {
+            JOptionPane.showMessageDialog(null, "Username is required");
+
+        }
+        if (jPasswordField1.getPassword().equals("")) {
+            JOptionPane.showMessageDialog(null, "Password is required");
+
+        }
+        if (txt_Email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Email is required");
+
+        }
+        if (!checkUser_DB(txt_Username.getText())) {
+
+            try {
+                // TODO add your handling code here:
+                readDataBase();
+            } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Username is taken chose another one");
         }
     }//GEN-LAST:event_btn_RegisterActionPerformed
 
+    public boolean checkUser_DB(String username) {
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        boolean e = false;
+
+        String query = "SELECT * FROM `user` WHERE `username` like ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                e = true;
+
+                // this.dispose();
+            } else {
+                e = false;
+
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        return e;
+    }
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         // TODO add your handling code here:
         Login login_form = new Login();

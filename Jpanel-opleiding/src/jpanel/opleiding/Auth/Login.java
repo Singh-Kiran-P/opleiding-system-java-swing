@@ -9,23 +9,14 @@ package jpanel.opleiding.Auth;
 
 import jpanel.opleiding.Home.Home_JFrame;
 import java.awt.Dimension;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.awt.event.WindowEvent;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
 import jpanel.opleiding.Admin.Admin_page;
 import jpanel.opleiding.Home.userData;
-import jpanel.opleiding.MyConnection;
 import jpanel.opleiding.MyConnection;
 
 /**

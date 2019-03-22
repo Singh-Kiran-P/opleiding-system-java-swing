@@ -321,7 +321,7 @@ public class Home_JFrame extends javax.swing.JFrame {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
                 JList<String> theList = (JList) mouseEvent.getSource();
-                if (mouseEvent.getClickCount() == 2) {
+                if (mouseEvent.getClickCount() == 1) {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                         Object o = theList.getModel().getElementAt(index);
