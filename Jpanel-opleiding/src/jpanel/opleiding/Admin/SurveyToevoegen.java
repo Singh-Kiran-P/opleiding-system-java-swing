@@ -17,6 +17,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import jpanel.opleiding.MyConnection;
 
+import jpanel.opleiding.Home.Home_JFrame;
+import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import jpanel.opleiding.Admin.Admin_page;
+import jpanel.opleiding.Home.userData;
+import jpanel.opleiding.MyConnection;
+
 /**
  *
  * @author singh
@@ -54,7 +66,6 @@ public class SurveyToevoegen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rbtn_ja_nee = new javax.swing.JRadioButton();
         rbtn_Meerkeuze = new javax.swing.JRadioButton();
-        rbtn_Schaalvraag = new javax.swing.JRadioButton();
         rbtn_Openvraag = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,9 +119,6 @@ public class SurveyToevoegen extends javax.swing.JFrame {
         soortVraag.add(rbtn_Meerkeuze);
         rbtn_Meerkeuze.setText("Meerkeuze vraag");
 
-        soortVraag.add(rbtn_Schaalvraag);
-        rbtn_Schaalvraag.setText("Schaal vraag");
-
         soortVraag.add(rbtn_Openvraag);
         rbtn_Openvraag.setText("Open vraag");
 
@@ -121,11 +129,9 @@ public class SurveyToevoegen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rbtn_ja_nee, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(107, 107, 107)
                 .addComponent(rbtn_Meerkeuze, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(rbtn_Schaalvraag, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addComponent(rbtn_Openvraag, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -136,7 +142,6 @@ public class SurveyToevoegen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtn_ja_nee)
                     .addComponent(rbtn_Meerkeuze)
-                    .addComponent(rbtn_Schaalvraag)
                     .addComponent(rbtn_Openvraag))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -164,26 +169,23 @@ public class SurveyToevoegen extends javax.swing.JFrame {
 
     private void btn_ToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ToevoegenActionPerformed
         // TODO add your handling code here:
-        
-        if (txt_vraag.getText().equals("")) {
-            
-                    JOptionPane.showMessageDialog(null, "Gelieve de vraag in te vullen", "InfoBox: " + "Error", JOptionPane.INFORMATION_MESSAGE);
 
-            
+        if (txt_vraag.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Gelieve de vraag in te vullen", "InfoBox: " + "Error", JOptionPane.INFORMATION_MESSAGE);
+
         }
 
         rbtn_Meerkeuze.setActionCommand("meerkeuze");
         rbtn_Openvraag.setActionCommand("openvraag");
-        rbtn_Schaalvraag.setActionCommand("schaalvraag");
         rbtn_ja_nee.setActionCommand("ja-nee");
-        
+
         try {
-            
+
             sendVraag_Db();
         } catch (Exception ex) {
             Logger.getLogger(SurveyToevoegen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
 
     }//GEN-LAST:event_btn_ToevoegenActionPerformed
@@ -205,14 +207,19 @@ public class SurveyToevoegen extends javax.swing.JFrame {
                     .prepareStatement("INSERT INTO `vragen` (`id`, `vraag`, `vraagSoort`, `opleidingId`) VALUES (NULL, ?, ?, ?)");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
-            
+
             String soortvraag = soortVraag.getSelection().getActionCommand();
             preparedStatement.setString(1, txt_vraag.getText());
             preparedStatement.setString(2, soortvraag);
             preparedStatement.setInt(3, this.opleidingID);
 
             preparedStatement.executeUpdate();
-            JOptionPane.showMessageDialog(null, "vraag toegevoegd");       
+            if (soortvraag.equals("meerkeuze")) {
+
+                meerkeuze(txt_vraag.getText());
+            } else {
+                JOptionPane.showMessageDialog(null, "vraag Toegevoegd");
+            }
             txt_vraag.setText("");
 
         } catch (Exception e) {
@@ -233,9 +240,51 @@ public class SurveyToevoegen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbtn_Meerkeuze;
     private javax.swing.JRadioButton rbtn_Openvraag;
-    private javax.swing.JRadioButton rbtn_Schaalvraag;
     private javax.swing.JRadioButton rbtn_ja_nee;
     private javax.swing.ButtonGroup soortVraag;
     private javax.swing.JTextArea txt_vraag;
     // End of variables declaration//GEN-END:variables
+
+    private void meerkeuze(String vraag) {
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM vragen WHERE `vraag` like ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            ps.setString(1, vraag);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                meerkuezeID(Integer.parseInt(rs.getString("id")), rs.getString("vraag"));
+                JOptionPane.showMessageDialog(null, "Voeg Keuze voor deze vraag toe");
+
+            } else {  
+            }
+
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(SurveyToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void meerkuezeID(int vraagId, String vraag) {
+        Meerkeuze mf = new Meerkeuze();
+        // set the jframe size and location, and make it visible
+        mf.setPreferredSize(new Dimension(400, 320));
+        mf.pack();
+        mf.setTitle("Opleiding System");
+        mf.setvraagId(vraagId);
+        mf.setvraag(vraag);
+        mf.setOpleidingId(opleidingID);
+        mf.load();
+        mf.setLocationRelativeTo(null);
+        mf.setVisible(rootPaneCheckingEnabled);
+
+        this.setVisible(false);
+
+    }
 }
