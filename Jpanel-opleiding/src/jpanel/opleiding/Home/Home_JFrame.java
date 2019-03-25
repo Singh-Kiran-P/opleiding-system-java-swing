@@ -300,7 +300,13 @@ public class Home_JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_VerwwijderActionPerformed
 
     private void btn_SurveyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SurveyActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            zoekSurvey();
+        } catch (Exception ex) {
+            Logger.getLogger(Home_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btn_SurveyActionPerformed
 
     public void inLaden() {
@@ -513,6 +519,41 @@ public class Home_JFrame extends javax.swing.JFrame {
 
     }
 
+    public void zoekSurvey() throws Exception {
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM `vragen` WHERE opleidingId =  ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            int firstSelIx = list_opleiding.getSelectedIndex();
+            Object sel = list_opleiding.getModel().getElementAt(firstSelIx);
+            String string = sel.toString();
+            String[] parts = string.split("°");
+            String opleidingId = parts[1];
+
+            ps.setString(1, opleidingId);
+            rs = ps.executeQuery();
+            
+
+            if (rs.next()) {
+                Survey mf = new Survey();
+                // set the jframe size and location, and make it visible
+                mf.setPreferredSize(new Dimension(361, 450));
+                mf.pack();
+                mf.setLocationRelativeTo(null);
+                mf.setVisible(rootPaneCheckingEnabled);
+
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Geen survey gevonden voor deze opleiding");
+
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelOpleiding;
