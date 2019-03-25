@@ -8,6 +8,7 @@ package jpanel.opleiding.Admin;
 import jpanel.opleiding.Auth.Login;
 import jpanel.opleiding.Admin.OpleidingToevoegen;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -71,7 +72,7 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btn_verwijderen = new javax.swing.JButton();
         btn_Toevoegen = new javax.swing.JButton();
-        btn_logout = new javax.swing.JButton();
+        btn_gebruikersBeheer = new javax.swing.JButton();
         btn_surveyToevoegen = new javax.swing.JButton();
         btn_surveyTonen = new javax.swing.JButton();
         btn_logout1 = new javax.swing.JButton();
@@ -153,15 +154,15 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_Toevoegen);
         btn_Toevoegen.setBounds(20, 280, 210, 21);
 
-        btn_logout.setText(" Gebruikersbeheer");
-        btn_logout.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+        btn_gebruikersBeheer.setText(" Gebruikersbeheer");
+        btn_gebruikersBeheer.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_gebruikersBeheer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
+                btn_gebruikersBeheerActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_logout);
-        btn_logout.setBounds(790, 250, 150, 20);
+        jPanel1.add(btn_gebruikersBeheer);
+        btn_gebruikersBeheer.setBounds(790, 250, 150, 20);
 
         btn_surveyToevoegen.setText("survey Tonen");
         btn_surveyToevoegen.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +246,17 @@ public class Admin_page extends javax.swing.JFrame {
         st.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_surveyToevoegenActionPerformed
+
+    private void btn_gebruikersBeheerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gebruikersBeheerActionPerformed
+        // TODO add your handling code here:
+        Gebruikersbeheer_Form st = new Gebruikersbeheer_Form();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(737, 332));
+        st.pack();
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_gebruikersBeheerActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
@@ -494,7 +506,7 @@ public class Admin_page extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Toevoegen;
-    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_gebruikersBeheer;
     private javax.swing.JButton btn_logout1;
     private javax.swing.JButton btn_surveyToevoegen;
     private javax.swing.JButton btn_surveyTonen;

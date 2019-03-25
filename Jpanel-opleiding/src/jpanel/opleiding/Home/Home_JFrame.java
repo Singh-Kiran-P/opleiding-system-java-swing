@@ -105,6 +105,11 @@ public class Home_JFrame extends javax.swing.JFrame {
         jLabel1.setBounds(20, 20, 160, 13);
 
         btn_Survey.setText("Take Survey ");
+        btn_Survey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SurveyActionPerformed(evt);
+            }
+        });
         PanelOpleiding.add(btn_Survey);
         btn_Survey.setBounds(360, 90, 180, 30);
 
@@ -293,6 +298,10 @@ public class Home_JFrame extends javax.swing.JFrame {
             Logger.getLogger(Home_JFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_VerwwijderActionPerformed
+
+    private void btn_SurveyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SurveyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SurveyActionPerformed
 
     public void inLaden() {
 

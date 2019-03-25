@@ -164,6 +164,13 @@ public class SurveyToevoegen extends javax.swing.JFrame {
 
     private void btn_ToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ToevoegenActionPerformed
         // TODO add your handling code here:
+        
+        if (txt_vraag.getText().equals("")) {
+            
+                    JOptionPane.showMessageDialog(null, "Gelieve de vraag in te vullen", "InfoBox: " + "Error", JOptionPane.INFORMATION_MESSAGE);
+
+            
+        }
 
         rbtn_Meerkeuze.setActionCommand("meerkeuze");
         rbtn_Openvraag.setActionCommand("openvraag");

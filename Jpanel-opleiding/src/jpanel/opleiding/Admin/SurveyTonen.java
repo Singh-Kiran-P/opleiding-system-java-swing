@@ -120,6 +120,11 @@ public class SurveyTonen extends javax.swing.JFrame {
         });
 
         btn_Wijzigen.setText("Wijzigen");
+        btn_Wijzigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_WijzigenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,10 +143,11 @@ public class SurveyTonen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Verwijderen)
-                    .addComponent(btn_Toevoegen)
-                    .addComponent(btn_Wijzigen))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_Wijzigen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Verwijderen)
+                        .addComponent(btn_Toevoegen)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -190,10 +196,35 @@ public class SurveyTonen extends javax.swing.JFrame {
             Logger.getLogger(SurveyTonen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_VerwijderenActionPerformed
+
+    private void btn_WijzigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_WijzigenActionPerformed
+        // TODO add your handling code here:
+
+        int firstSelIx = list_opleiding.getSelectedIndex();
+        Object sel = list_opleiding.getModel().getElementAt(firstSelIx);
+        String string = sel.toString();
+        String[] parts = string.split("°");
+        String vraag = parts[0].trim();
+        String[] partss = string.split("");
+        
+        VraagWijzigen st = new VraagWijzigen();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(578, 165));
+        st.pack();
+        st.setopleidingID(opleidingID);
+        st.setVraag(vraag);
+        st.setVraagId(Integer.parseInt( parts[1]));
+        st.load();
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btn_WijzigenActionPerformed
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+
     public void verwijder_vraag_DB() throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -210,10 +241,8 @@ public class SurveyTonen extends javax.swing.JFrame {
             String string = sel.toString();
             String[] parts = string.split("°");
             String vraagId = parts[1];
-            
 
             preparedStatement.setString(1, vraagId);
-
 
             preparedStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Vraag verwijderd");
@@ -225,6 +254,7 @@ public class SurveyTonen extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * @param args the command line arguments
      */
@@ -276,7 +306,7 @@ public class SurveyTonen extends javax.swing.JFrame {
             int vraagnummer = 1;
             while (rs.next()) {
 
-                model.addElement(vraagnummer + ")  " + rs.getString("vraag") + "                                                                                                                                                                                                                                                                                                                                       °" + rs.getString("id"));
+                model.addElement( rs.getString("vraag") + "                                                                                                                                                                                                                                                                                                                                       °" + rs.getString("id"));
                 vraagnummer += 1;
                 // this.dispose();
             }
