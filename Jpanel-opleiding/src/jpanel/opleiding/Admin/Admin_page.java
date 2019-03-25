@@ -215,6 +215,9 @@ public class Admin_page extends javax.swing.JFrame {
 
     private void btn_logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logout1ActionPerformed
         // TODO add your handling code here:
+        Login login_form = new Login();
+        login_form.setVisible(rootPaneCheckingEnabled);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_logout1ActionPerformed
 
     private void btn_surveyTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_surveyTonenActionPerformed
@@ -235,8 +238,9 @@ public class Admin_page extends javax.swing.JFrame {
         SurveyTonen st = new SurveyTonen();
         st.setVisible(rootPaneCheckingEnabled);
         st.setPreferredSize(new Dimension(737, 332));
-
+        st.setopleidingID(Integer.parseInt(txt_ID.getText()));
         st.pack();
+        st.listInladen();
         st.setLocationRelativeTo(null);
         st.setVisible(true);
         this.setVisible(false);

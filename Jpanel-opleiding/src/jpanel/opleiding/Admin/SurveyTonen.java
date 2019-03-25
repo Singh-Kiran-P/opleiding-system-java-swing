@@ -6,12 +6,43 @@
 package jpanel.opleiding.Admin;
 
 import java.awt.Dimension;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import jpanel.opleiding.Auth.Login;
+import jpanel.opleiding.MyConnection;
+import jpanel.opleiding.Auth.Login;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
  * @author singh
  */
 public class SurveyTonen extends javax.swing.JFrame {
+
+    private int opleidingID;
+
+    public void setopleidingID(int id) {
+        this.opleidingID = id;
+    }
 
     /**
      * Creates new form SurveyTonen
@@ -30,24 +61,26 @@ public class SurveyTonen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        list_opleiding = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btn_Verwijderen = new javax.swing.JButton();
         btn_Toevoegen = new javax.swing.JButton();
         btn_Wijzigen = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(list_opleiding);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(30, 30, 680, 220);
 
-        jPanel3.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 203));
 
+        jLabel5.setBackground(new java.awt.Color(240, 240, 241));
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("<");
@@ -73,8 +106,18 @@ public class SurveyTonen extends javax.swing.JFrame {
         jPanel3.setBounds(0, 0, 31, 29);
 
         btn_Verwijderen.setText("Verwijderen");
+        btn_Verwijderen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VerwijderenActionPerformed(evt);
+            }
+        });
 
         btn_Toevoegen.setText("Toevoegen");
+        btn_Toevoegen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ToevoegenActionPerformed(evt);
+            }
+        });
 
         btn_Wijzigen.setText("Wijzigen");
 
@@ -105,6 +148,10 @@ public class SurveyTonen extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 250, 740, 60);
 
+        jLabel1.setText("Vragen");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(40, 10, 100, 13);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +170,61 @@ public class SurveyTonen extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void btn_ToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ToevoegenActionPerformed
+        // TODO add your handling code here:
+        SurveyToevoegen1 st = new SurveyToevoegen1();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(605, 240));
+        st.setopleidingID(opleidingID);
+        st.pack();
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_ToevoegenActionPerformed
+
+    private void btn_VerwijderenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VerwijderenActionPerformed
+        try {
+            // TODO add your handling code here:
+            verwijder_vraag_DB();
+        } catch (Exception ex) {
+            Logger.getLogger(SurveyTonen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_VerwijderenActionPerformed
+    private Connection connect = null;
+    private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+    public void verwijder_vraag_DB() throws Exception {
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            connect = MyConnection.getConnection();
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect
+                    .prepareStatement("DELETE FROM `vragen` WHERE `vragen`.`id` = ?");
+            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            // Parameters start with 1
+            int firstSelIx = list_opleiding.getSelectedIndex();
+            Object sel = list_opleiding.getModel().getElementAt(firstSelIx);
+            String string = sel.toString();
+            String[] parts = string.split("°");
+            String vraagId = parts[1];
+            
+
+            preparedStatement.setString(1, vraagId);
+
+
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Vraag verwijderd");
+
+            listInladen();
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -158,14 +260,45 @@ public class SurveyTonen extends javax.swing.JFrame {
         });
     }
 
+    public void listInladen() {
+
+        PreparedStatement ps;
+        ResultSet rs;
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * FROM `vragen` WHERE opleidingId =  ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setInt(1, this.opleidingID);
+            rs = ps.executeQuery();
+
+            int vraagnummer = 1;
+            while (rs.next()) {
+
+                model.addElement(vraagnummer + ")  " + rs.getString("vraag") + "                                                                                                                                                                                                                                                                                                                                       °" + rs.getString("id"));
+                vraagnummer += 1;
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+
+        list_opleiding.setModel(model);
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Toevoegen;
     private javax.swing.JButton btn_Verwijderen;
     private javax.swing.JButton btn_Wijzigen;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list_opleiding;
     // End of variables declaration//GEN-END:variables
 }

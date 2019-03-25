@@ -21,7 +21,7 @@ import jpanel.opleiding.MyConnection;
  *
  * @author singh
  */
-public class SurveyToevoegen extends javax.swing.JFrame {
+public class SurveyToevoegen1 extends javax.swing.JFrame {
 
     private int opleidingID;
 
@@ -32,7 +32,7 @@ public class SurveyToevoegen extends javax.swing.JFrame {
     /**
      * Creates new form SurveyToevoegen
      */
-    public SurveyToevoegen() {
+    public SurveyToevoegen1() {
         initComponents();
     }
 
@@ -149,16 +149,15 @@ public class SurveyToevoegen extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        Admin_page mf = new Admin_page();
-        // set the jframe size and location, and make it visible
-        mf.setPreferredSize(new Dimension(950, 350));
-        mf.pack();
-        mf.setTitle("Opleiding System");
-        mf.main();
-        mf.listInladen();
-        mf.setLocationRelativeTo(null);
-        mf.setVisible(rootPaneCheckingEnabled);
-
+        SurveyTonen st = new SurveyTonen();
+        st.setVisible(rootPaneCheckingEnabled);
+        st.setPreferredSize(new Dimension(737, 332));
+        st.pack();
+        st.setopleidingID(opleidingID);
+        st.listInladen();
+        
+        st.setLocationRelativeTo(null);
+        st.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -169,14 +168,13 @@ public class SurveyToevoegen extends javax.swing.JFrame {
         rbtn_Openvraag.setActionCommand("openvraag");
         rbtn_Schaalvraag.setActionCommand("schaalvraag");
         rbtn_ja_nee.setActionCommand("ja-nee");
-        
+
         try {
-            
+
             sendVraag_Db();
         } catch (Exception ex) {
-            Logger.getLogger(SurveyToevoegen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurveyToevoegen1.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
 
     }//GEN-LAST:event_btn_ToevoegenActionPerformed
@@ -198,14 +196,14 @@ public class SurveyToevoegen extends javax.swing.JFrame {
                     .prepareStatement("INSERT INTO `vragen` (`id`, `vraag`, `vraagSoort`, `opleidingId`) VALUES (NULL, ?, ?, ?)");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
-            
+
             String soortvraag = soortVraag.getSelection().getActionCommand();
             preparedStatement.setString(1, txt_vraag.getText());
             preparedStatement.setString(2, soortvraag);
             preparedStatement.setInt(3, this.opleidingID);
 
             preparedStatement.executeUpdate();
-            JOptionPane.showMessageDialog(null, "vraag toegevoegd");       
+            JOptionPane.showMessageDialog(null, "vraag toegevoegd");
             txt_vraag.setText("");
 
         } catch (Exception e) {
