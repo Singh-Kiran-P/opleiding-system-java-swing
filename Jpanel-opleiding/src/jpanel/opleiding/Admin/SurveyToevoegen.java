@@ -249,12 +249,13 @@ public class SurveyToevoegen extends javax.swing.JFrame {
         PreparedStatement ps;
         ResultSet rs;
 
-        String query = "SELECT * FROM vragen WHERE `vraag` like ?";
+        String query = "SELECT * FROM vragen WHERE `vraag` like ? && vraagSoort like 'meerkeuze' && opleidingId = ?";
 
         try {
             ps = MyConnection.getConnection().prepareStatement(query);
 
             ps.setString(1, vraag);
+            ps.setInt(2, opleidingID);
 
             rs = ps.executeQuery();
 
@@ -262,7 +263,7 @@ public class SurveyToevoegen extends javax.swing.JFrame {
                 meerkuezeID(Integer.parseInt(rs.getString("id")), rs.getString("vraag"));
                 JOptionPane.showMessageDialog(null, "Voeg Keuze voor deze vraag toe");
 
-            } else {  
+            } else {
             }
 
         } catch (SQLException ex) {
