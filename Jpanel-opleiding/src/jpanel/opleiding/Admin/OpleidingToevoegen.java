@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
+import jpanel.opleiding.MyConnection;
 
 /**
  *
@@ -42,9 +43,7 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/stagedb?"
-                            + "user=root&password=");
+            connect = MyConnection.getConnection();
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect

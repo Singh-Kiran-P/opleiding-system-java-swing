@@ -19,6 +19,7 @@ public class JpanelOpleiding {
     public static void main(String[] args) throws Exception {
 
         new Login().setVisible(true);
+        
 
     }
 

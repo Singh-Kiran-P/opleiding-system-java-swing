@@ -387,9 +387,7 @@ public class Home_JFrame extends javax.swing.JFrame {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/stagedb?"
-                            + "user=root&password=");
+            connect = MyConnection.getConnection();
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
@@ -478,10 +476,7 @@ public class Home_JFrame extends javax.swing.JFrame {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/stagedb?"
-                            + "user=root&password=");
-
+            connect = MyConnection.getConnection();
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect
                     .prepareStatement("DELETE FROM `user_opleiding` WHERE `user_opleiding`.`userId` = ? && `user_opleiding`.`opleidingId` = ?");
