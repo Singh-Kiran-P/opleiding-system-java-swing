@@ -80,6 +80,8 @@ public class Admin_page extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        list_opleiding.setBackground(new java.awt.Color(77, 77, 77));
+        list_opleiding.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(list_opleiding);
 
         getContentPane().add(jScrollPane1);
@@ -97,18 +99,23 @@ public class Admin_page extends javax.swing.JFrame {
         getContentPane().add(txt_datum);
         txt_datum.setBounds(350, 220, 240, 40);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Datum");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(350, 200, 170, 13);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Opleiding");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(350, 60, 70, 13);
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Locatie");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(350, 130, 110, 13);
 
+        btn_wijzigen.setBackground(new java.awt.Color(0, 0, 0));
+        btn_wijzigen.setForeground(new java.awt.Color(255, 255, 255));
         btn_wijzigen.setText("Wijzigen");
         btn_wijzigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,13 +127,16 @@ public class Admin_page extends javax.swing.JFrame {
         getContentPane().add(txt_ID);
         txt_ID.setBounds(350, 30, 240, 20);
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Id");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(350, 10, 70, 13);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 203));
+        jPanel1.setBackground(new java.awt.Color(255, 128, 60));
         jPanel1.setLayout(null);
 
+        btn_verwijderen.setBackground(new java.awt.Color(0, 0, 0));
+        btn_verwijderen.setForeground(new java.awt.Color(255, 255, 255));
         btn_verwijderen.setText("Verwijderen");
         btn_verwijderen.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -145,6 +155,8 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_verwijderen);
         btn_verwijderen.setBounds(470, 280, 120, 21);
 
+        btn_Toevoegen.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Toevoegen.setForeground(new java.awt.Color(255, 255, 255));
         btn_Toevoegen.setText("Opleiding Toevoegen");
         btn_Toevoegen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +176,8 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_gebruikersBeheer);
         btn_gebruikersBeheer.setBounds(790, 250, 150, 20);
 
+        btn_surveyToevoegen.setBackground(new java.awt.Color(0, 0, 0));
+        btn_surveyToevoegen.setForeground(new java.awt.Color(255, 255, 255));
         btn_surveyToevoegen.setText("survey Tonen");
         btn_surveyToevoegen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +187,8 @@ public class Admin_page extends javax.swing.JFrame {
         jPanel1.add(btn_surveyToevoegen);
         btn_surveyToevoegen.setBounds(800, 60, 140, 20);
 
+        btn_surveyTonen.setBackground(new java.awt.Color(0, 0, 0));
+        btn_surveyTonen.setForeground(new java.awt.Color(255, 255, 255));
         btn_surveyTonen.setText("survey Toevoegen");
         btn_surveyTonen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

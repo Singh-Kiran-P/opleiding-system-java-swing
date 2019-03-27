@@ -11,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,6 +34,7 @@ public class Home_JFrame extends javax.swing.JFrame {
     public void setInfo(String[] info) {
         this.info = info;
     }
+    public userData DataUser;
 
     /**
      * Creates new form Home_JFrame
@@ -95,6 +95,15 @@ public class Home_JFrame extends javax.swing.JFrame {
         PanelOpleiding.add(btn_AllOpleidingen);
         btn_AllOpleidingen.setBounds(20, 380, 300, 30);
 
+        list_opleiding.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                list_opleidingAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(list_opleiding);
 
         PanelOpleiding.add(jScrollPane1);
@@ -306,8 +315,12 @@ public class Home_JFrame extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Home_JFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btn_SurveyActionPerformed
+
+    private void list_opleidingAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_list_opleidingAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_list_opleidingAncestorAdded
 
     public void inLaden() {
 
@@ -332,7 +345,7 @@ public class Home_JFrame extends javax.swing.JFrame {
     }
 
     public void main() {
-
+        DataUser = Login.user_Data;
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
                 JList<String> theList = (JList) mouseEvent.getSource();
@@ -535,17 +548,27 @@ public class Home_JFrame extends javax.swing.JFrame {
 
             ps.setString(1, opleidingId);
             rs = ps.executeQuery();
-            
 
             if (rs.next()) {
-                Survey mf = new Survey();
-                // set the jframe size and location, and make it visible
-                mf.setPreferredSize(new Dimension(361, 450));
-                mf.pack();
-                mf.setLocationRelativeTo(null);
-                mf.setVisible(rootPaneCheckingEnabled);
+                boolean check = checkAlreadyDone(DataUser.getId(), opleidingId);
+                if (!check) {
 
-                this.setVisible(false);
+                    Survey mf = new Survey();
+                    // set the jframe size and location, and make it visible
+                    mf.setPreferredSize(new Dimension(642, 190));
+                    mf.pack();
+                    mf.setOpleidingId(Integer.parseInt(opleidingId));
+
+                    mf.load();
+                    mf.ToonVraag();
+                    mf.setLocationRelativeTo(null);
+                    mf.setVisible(rootPaneCheckingEnabled);
+
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "U hebt deze Survey al gedaan");
+
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Geen survey gevonden voor deze opleiding");
 
@@ -584,4 +607,30 @@ public class Home_JFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txt_username5;
     private javax.swing.JLabel txt_username6;
     // End of variables declaration//GEN-END:variables
+
+    public boolean checkAlreadyDone(String id, String opleidingId) {
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "select * from antwoorden inner join vragen on antwoorden.vraagId = vragen.id inner join opleiding on vragen.opleidingId = opleiding.id where  antwoorden.userId = ? && vragen.opleidingId = ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            ps.setString(1, id);
+            ps.setString(2, opleidingId);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Geen survey gevonden voor deze opleiding");
+
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
