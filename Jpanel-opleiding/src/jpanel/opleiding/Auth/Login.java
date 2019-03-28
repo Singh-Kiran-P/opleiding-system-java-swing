@@ -179,7 +179,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_UsernameActionPerformed
     public static userData user_Data;
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
-        PreparedStatement ps;
+         PreparedStatement ps;
         ResultSet rs;
         String uname = txt_Username.getText();
         String pass = String.valueOf(jPasswordField1.getPassword());
