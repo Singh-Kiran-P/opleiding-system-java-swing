@@ -624,10 +624,7 @@ public class Home_JFrame extends javax.swing.JFrame {
 
             if (rs.next()) {
                 return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Geen survey gevonden voor deze opleiding");
-
-            }
+            } 
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

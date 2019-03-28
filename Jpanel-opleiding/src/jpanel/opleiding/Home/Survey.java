@@ -86,12 +86,15 @@ public class Survey extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txt_antwoord = new javax.swing.JTextField();
         txt_vraag = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btn_Next = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,13 +149,22 @@ public class Survey extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        jRadioButton1.setText("Ja");
+
+        jRadioButton2.setText("Nee");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -162,7 +174,11 @@ public class Survey extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -179,8 +195,9 @@ public class Survey extends javax.swing.JFrame {
         Vragen oVragen;
         oVragen = vragenList.get(vragenTeler);
         var id = oVragen.getId();
+        
         try {
-            submitAntwoord(id);
+            submitAntwoord(id,txt_antwoord.getText());
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(Survey.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -259,7 +276,6 @@ public class Survey extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-
                 Vragen vraagElement = buildVraag(rs);
                 vragenList.add(vraagElement);
                 // this.dispose();
@@ -283,9 +299,12 @@ public class Survey extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Next;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField txt_antwoord;
     private javax.swing.JLabel txt_vraag;
     // End of variables declaration//GEN-END:variables
@@ -295,12 +314,20 @@ public class Survey extends javax.swing.JFrame {
     public void ToonVraag() {
         Vragen oVragen;
         oVragen = vragenList.get(vragenTeler);
+        String vraagSoort = oVragen.getVraagSoort();
+
+        if (vraagSoort.equals("meerkeuze")) {
+            
+        }
+        if (vraagSoort.equals("meerkeuze")) {
+
+        }
         txt_vraag.setText(oVragen.getVraag());
 
     }
 
-    private void submitAntwoord(int id) throws Exception {
-        String antwoord = txt_antwoord.getText();
+    private void submitAntwoord(int id, String antwoordx) throws Exception {
+        String antwoord = antwoordx;
         int vraagId = id;
         String userId = DataUser.getId();
 
@@ -320,6 +347,10 @@ public class Survey extends javax.swing.JFrame {
 
         preparedStatement.executeUpdate();
 
+    }
+
+    public void meerkeuzeVragen() {
+        // TODO:multikeuze antwoord
     }
 
 }

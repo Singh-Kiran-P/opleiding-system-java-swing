@@ -267,8 +267,9 @@ public class Admin_page extends javax.swing.JFrame {
         // TODO add your handling code here:
         Gebruikersbeheer_Form st = new Gebruikersbeheer_Form();
         st.setVisible(rootPaneCheckingEnabled);
-        st.setPreferredSize(new Dimension(737, 332));
+        st.setPreferredSize(new Dimension(1000, 450));
         st.pack();
+        st.main();
         st.setLocationRelativeTo(null);
         st.setVisible(true);
         this.setVisible(false);
@@ -282,7 +283,6 @@ public class Admin_page extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         PreparedStatement ps;
         ResultSet rs;
 
