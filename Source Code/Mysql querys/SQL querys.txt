@@ -1,0 +1,40 @@
+SELECT * FROM `opleiding` INNER JOIN `user_opleiding` ON `opleiding`.`id` = `user_opleiding`.`opleidingId` && user_opleiding.userId = 14
+
+voor opleiding per user
+SELECT `opleiding`.`opleiding` FROM `opleiding` INNER JOIN `user_opleiding` ON `opleiding`.`id` = `user_opleiding`.`opleidingId` && user_opleiding.userId = 14
+
+
+
+
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * FROM `opleiding`";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                model.addElement(rs.getString("opleiding") + "                                                                                                                                                                                           °" + rs.getString("id") + "");
+
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+
+
+
+
+
+
+#####zoek of survey al gedaan query
+
+select * from antwoorden inner join vragen on antwoorden.vraagId = vragen.id inner join opleiding on vragen.opleidingId = opleiding.id where  antwoorden.userId = 13 && vragen.opleidingId = 32
