@@ -28,3 +28,13 @@ SELECT `opleiding`.`opleiding` FROM `opleiding` INNER JOIN `user_opleiding` ON `
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
+
+
+
+
+
+
+#####zoek of survey al gedaan query
+
+select * from antwoorden inner join vragen on antwoorden.vraagId = vragen.id inner join opleiding on vragen.opleidingId = opleiding.id where  antwoorden.userId = 13 && vragen.opleidingId = 32
