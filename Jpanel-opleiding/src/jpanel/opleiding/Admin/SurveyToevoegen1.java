@@ -46,6 +46,8 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
     private void initComponents() {
 
         soortVraag = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_vraag = new javax.swing.JTextArea();
         btn_Toevoegen = new javax.swing.JButton();
@@ -54,8 +56,9 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rbtn_ja_nee = new javax.swing.JRadioButton();
         rbtn_Meerkeuze = new javax.swing.JRadioButton();
-        rbtn_Schaalvraag = new javax.swing.JRadioButton();
         rbtn_Openvraag = new javax.swing.JRadioButton();
+
+        jScrollPane2.setViewportView(jTree1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -108,9 +111,6 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
         soortVraag.add(rbtn_Meerkeuze);
         rbtn_Meerkeuze.setText("Meerkeuze vraag");
 
-        soortVraag.add(rbtn_Schaalvraag);
-        rbtn_Schaalvraag.setText("Schaal vraag");
-
         soortVraag.add(rbtn_Openvraag);
         rbtn_Openvraag.setText("Open vraag");
 
@@ -121,11 +121,9 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rbtn_ja_nee, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(110, 110, 110)
                 .addComponent(rbtn_Meerkeuze, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(rbtn_Schaalvraag, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(rbtn_Openvraag, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -136,7 +134,6 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtn_ja_nee)
                     .addComponent(rbtn_Meerkeuze)
-                    .addComponent(rbtn_Schaalvraag)
                     .addComponent(rbtn_Openvraag))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -170,7 +167,6 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
         }
         rbtn_Meerkeuze.setActionCommand("meerkeuze");
         rbtn_Openvraag.setActionCommand("openvraag");
-        rbtn_Schaalvraag.setActionCommand("schaalvraag");
         rbtn_ja_nee.setActionCommand("ja-nee");
 
         try {
@@ -226,9 +222,10 @@ public class SurveyToevoegen1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTree jTree1;
     private javax.swing.JRadioButton rbtn_Meerkeuze;
     private javax.swing.JRadioButton rbtn_Openvraag;
-    private javax.swing.JRadioButton rbtn_Schaalvraag;
     private javax.swing.JRadioButton rbtn_ja_nee;
     private javax.swing.ButtonGroup soortVraag;
     private javax.swing.JTextArea txt_vraag;

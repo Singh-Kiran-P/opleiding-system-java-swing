@@ -177,7 +177,7 @@ public class SurveyToevoegen extends javax.swing.JFrame {
         }
 
         rbtn_Meerkeuze.setActionCommand("meerkeuze");
-        rbtn_Openvraag.setActionCommand("openvraag");
+        rbtn_Openvraag.setActionCommand("open-vraag");
         rbtn_ja_nee.setActionCommand("ja-nee");
 
         try {

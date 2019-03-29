@@ -178,7 +178,7 @@ public class SurveyTonen extends javax.swing.JFrame {
 
     private void btn_ToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ToevoegenActionPerformed
         // TODO add your handling code here:
-        SurveyToevoegen1 st = new SurveyToevoegen1();
+        SurveyToevoegen st = new SurveyToevoegen();
         st.setVisible(rootPaneCheckingEnabled);
         st.setPreferredSize(new Dimension(605, 240));
         st.setopleidingID(opleidingID);

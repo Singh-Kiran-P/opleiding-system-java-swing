@@ -87,15 +87,17 @@ public class Survey extends javax.swing.JFrame {
     private void initComponents() {
 
         keuzeGroep = new javax.swing.ButtonGroup();
+        keuzeMeerkeuzeGroep = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txt_antwoord = new javax.swing.JTextField();
         txt_vraag = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        btn_Next = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        txt_Keuze = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        btn_Next = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,36 +115,6 @@ public class Survey extends javax.swing.JFrame {
         txt_vraag.setText("Vraag ?");
         jPanel1.add(txt_vraag);
         txt_vraag.setBounds(0, 0, 620, 30);
-
-        jButton1.setText("Back");
-
-        btn_Next.setText("Next");
-        btn_Next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_NextActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
-                .addComponent(btn_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btn_Next, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                .addContainerGap())
-        );
 
         keuzeGroep.add(jRadioButton1);
         jRadioButton1.setText("Ja");
@@ -170,6 +142,43 @@ public class Survey extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(0, 40, 622, 29);
+
+        txt_Keuze.setText("keuzeMeer");
+        jPanel1.add(txt_Keuze);
+        txt_Keuze.setBounds(400, 0, 220, 20);
+
+        jButton1.setText("Back");
+
+        btn_Next.setText("Next");
+        btn_Next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NextActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(btn_Next, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,9 +186,8 @@ public class Survey extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -187,11 +195,9 @@ public class Survey extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,14 +213,22 @@ public class Survey extends javax.swing.JFrame {
         Vragen oVragen;
         oVragen = vragenList.get(vragenTeler);
         var id = oVragen.getId();
-
+        var vraagSoort = oVragen.getVraagSoort();
         try {
-            String antwoord = keuzeGroep.getSelection().getActionCommand();
-            if (antwoord != null) {
-                txt_antwoord.setText(antwoord);
-            }
+            String antwoord_ja_nee = keuzeGroep.getSelection().getActionCommand();
 
-            submitAntwoord(id, txt_antwoord.getText());
+            if (vraagSoort.equals("open-vraag")) {
+                submitAntwoord(id, txt_antwoord.getText());
+
+            }
+            if (vraagSoort.equals("ja-nee")) {
+                submitAntwoord(id, antwoord_ja_nee);
+
+            }
+            if (vraagSoort.equals("meerkeuze")) {
+                submitAntwoord(id, txt_antwoord.getText());
+
+            }
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(Survey.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -323,6 +337,8 @@ public class Survey extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.ButtonGroup keuzeGroep;
+    private javax.swing.ButtonGroup keuzeMeerkeuzeGroep;
+    private javax.swing.JLabel txt_Keuze;
     private javax.swing.JTextField txt_antwoord;
     private javax.swing.JLabel txt_vraag;
     // End of variables declaration//GEN-END:variables
@@ -338,7 +354,14 @@ public class Survey extends javax.swing.JFrame {
         jRadioButton2.setVisible(false);
 
         if (vraagSoort.equals("meerkeuze")) {
+            String Keuze = meerkeuzeVragen(oVragen.getId());
+            txt_Keuze.setText(Keuze);
 
+            jRadioButton1.setVisible(false);
+            jRadioButton2.setVisible(false);
+            txt_Keuze.setVisible(true);
+
+            txt_antwoord.setVisible(true);
         }
         if (vraagSoort.equals("ja-nee")) {
             jRadioButton1.setActionCommand("ja");
@@ -346,8 +369,21 @@ public class Survey extends javax.swing.JFrame {
 
             jRadioButton1.setVisible(true);
             jRadioButton2.setVisible(true);
+            txt_Keuze.setVisible(false);
+
+            txt_antwoord.setVisible(false);
 
         }
+        if (vraagSoort.equals("open-vraag")) {
+
+            jRadioButton1.setVisible(false);
+            jRadioButton2.setVisible(false);
+            txt_Keuze.setVisible(false);
+
+            txt_antwoord.setVisible(true);
+
+        }
+
         txt_vraag.setText(oVragen.getVraag());
 
     }
@@ -375,8 +411,40 @@ public class Survey extends javax.swing.JFrame {
 
     }
 
-    public void meerkeuzeVragen() {
+    public String meerkeuzeVragen(int vraagId) {
+        String keuze = null;
         // TODO:multikeuze antwoord
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String query = "SELECT * FROM meerkeuzevraag INNER JOIN vragen on meerkeuzevraag.vraagId = vragen.id WHERE vraagId = ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            var user_data = Login.user_Data;
+            ps.setInt(1, vraagId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String string = rs.getString("kueze");
+                String[] parts = string.split(",");
+                keuze = "Keuze: ";
+                for (int i = 0; i < parts.length; i++) {
+
+                    if (i + 1 == parts.length) {
+                        keuze += parts[i] + "";
+                        break;
+                    }
+                    keuze += parts[i] + " - ";
+                }
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        return keuze;
     }
 
 }
