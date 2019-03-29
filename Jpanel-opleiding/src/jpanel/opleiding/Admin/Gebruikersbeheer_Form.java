@@ -79,7 +79,7 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         listVragen = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
-        listVragen1 = new javax.swing.JList<>();
+        listUsers = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -180,26 +180,11 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Users", jPanel2);
 
-        list_opleiding.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(list_opleiding);
 
-        listVragen.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(listVragen);
 
-        listVragen1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(listVragen1);
+        jScrollPane4.setViewportView(listUsers);
 
         jLabel1.setText("Opleidingen");
 
@@ -218,13 +203,15 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 361, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,6 +313,7 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
         });
     }
     public userData DataUser;
+    public String opleidingId;
 
     public void main() {
         DataUser = Login.user_Data;
@@ -346,8 +334,8 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
 //        };
 //        tbl_user.addMouseListener(mouseListener);
         tblInladen();
-        UserperOpleiding();
         list_opleidingInladen();
+
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
                 JList<String> theList = (JList) mouseEvent.getSource();
@@ -356,10 +344,11 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
                     if (index >= 0) {
                         Object o = theList.getModel().getElementAt(index);
                         String[] parts = o.toString().split("°");
-                        String opleiding_Id = parts[1];
+                        String opleiding_id = parts[1];
 
-                        System.out.println(opleiding_Id);
-                        showvragen(opleiding_Id);
+                        opleidingId = opleiding_id;
+                        System.out.println(opleiding_id);
+                        UserperOpleiding(opleiding_id);
 
                     }
                 }
@@ -367,6 +356,26 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
 
         };
         list_opleiding.addMouseListener(mouseListener);
+
+        MouseListener mouseListener1 = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList<String> theList1 = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 1) {
+                    int index = theList1.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                        Object o = theList1.getModel().getElementAt(index);
+                        String[] parts = o.toString().split("°");
+                        String UserId = parts[1];
+
+                        System.out.println(UserId);
+                        showvragen(opleidingId, UserId);
+
+                    }
+                }
+            }
+
+        };
+        listUsers.addMouseListener(mouseListener1);
 
     }
 
@@ -424,8 +433,8 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JList<String> listUsers;
     private javax.swing.JList<String> listVragen;
-    private javax.swing.JList<String> listVragen1;
     private javax.swing.JList<String> list_opleiding;
     private javax.swing.JTable tbl_user;
     // End of variables declaration//GEN-END:variables
@@ -455,10 +464,10 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
         list_opleiding.setModel(model);
-        listVragen.setVisible(false);
+
     }
 
-    public void showvragen(String opleiding_Id) {
+    public void showvragen(String opleiding_Id, String userId) {
 
         listVragen.setVisible(true);
         PreparedStatement ps;
@@ -471,24 +480,81 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
             ps = MyConnection.getConnection().prepareStatement(query);
             ps.setString(1, opleiding_Id);
             rs = ps.executeQuery();
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Geen survey gevond voor deze user");
 
+            }
             int vraagnummer = 1;
             while (rs.next()) {
 
-                model.addElement(vraagnummer +"° "+rs.getString("vraag") + "                                                                                                                                                                                                                                                                                                                                       °" + rs.getString("id"));
-                vraagnummer += 1;
-                // this.dispose();
+                String Antwoord = ToonAntwoord(rs.getString("id"), userId);
+                if (Antwoord.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Geen survey gevond voor deze user");
+                    break;
+                } else {
+                    model.addElement(vraagnummer + "° " + rs.getString("vraag") + "  Antwoord: " + Antwoord);
+                    vraagnummer += 1;
+                    // this.dispose();
+                }
             }
+
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        jScrollPane3.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
         listVragen.setModel(model);
 
     }
 
-    public void UserperOpleiding() {
-        
+    public void UserperOpleiding(String opleiding_Id) {
+        PreparedStatement ps;
+        ResultSet rs;
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT user.id,user.firstname,user.name from user_opleiding inner join user on user_opleiding.userId = user.id where opleidingId = ?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, opleiding_Id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                model.addElement(rs.getString("firstname") + " " + rs.getString("name") + "                                                                                                                                                                                                                                                                                                                                       °" + rs.getString("id"));
+
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        jScrollPane4.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+
+        listUsers.setModel(model);
+    }
+
+    private String ToonAntwoord(String vraagId, String userId) {
+
+        PreparedStatement ps;
+        ResultSet rs;
+        DefaultListModel model = new DefaultListModel();
+
+        String query = "SELECT * From antwoorden WHERE vraagId = ? && userId = ?";
+        String antwoord = "";
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, vraagId);
+            ps.setString(2, userId);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                antwoord = rs.getString("antwoord");
+                // this.dispose();
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        return antwoord;
     }
 }

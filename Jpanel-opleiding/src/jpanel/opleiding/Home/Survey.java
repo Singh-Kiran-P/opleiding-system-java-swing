@@ -375,7 +375,7 @@ public class Survey extends javax.swing.JFrame {
 
         }
         if (vraagSoort.equals("open-vraag")) {
-
+            txt_antwoord.setText("");
             jRadioButton1.setVisible(false);
             jRadioButton2.setVisible(false);
             txt_Keuze.setVisible(false);
