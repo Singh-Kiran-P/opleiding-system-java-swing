@@ -190,7 +190,7 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
 
         jLabel2.setText("Survey vragen");
 
-        jLabel3.setText("Deelname");
+        jLabel3.setText("Deelnemers");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -268,6 +268,7 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
 
                     ps = MyConnection.getConnection().prepareStatement(sql);
                     ps.executeUpdate();
+
                     System.out.println(sql);
                 } catch (SQLException ex) {
                     // Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,6 +277,8 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
             }
 
         }
+        JOptionPane.showMessageDialog(null, "Table updated !");
+
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     /**
@@ -349,6 +352,10 @@ public class Gebruikersbeheer_Form extends javax.swing.JFrame {
                         opleidingId = opleiding_id;
                         System.out.println(opleiding_id);
                         UserperOpleiding(opleiding_id);
+
+                        DefaultListModel listModel = (DefaultListModel) listVragen.getModel();
+                        listModel.removeAllElements();
+                        
 
                     }
                 }

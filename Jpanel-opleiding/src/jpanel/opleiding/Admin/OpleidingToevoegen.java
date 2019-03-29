@@ -55,7 +55,7 @@ public class OpleidingToevoegen extends javax.swing.JFrame {
 
             String sDate1 = txt_datum.getText();
 
-            preparedStatement.setDate(3, java.sql.Date.valueOf(sDate1));
+            preparedStatement.setString(3, txt_datum.getText());
 
             preparedStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Opleiding Toegevoegd");

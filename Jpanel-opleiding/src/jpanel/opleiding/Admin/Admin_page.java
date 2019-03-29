@@ -464,7 +464,7 @@ public class Admin_page extends javax.swing.JFrame {
 
             String sDate1 = txt_datum.getText();
 
-            preparedStatement.setDate(3, java.sql.Date.valueOf(sDate1));
+            preparedStatement.setString(3, sDate1);
 
             preparedStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Opleiding wijzigt");
